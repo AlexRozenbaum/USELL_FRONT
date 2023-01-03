@@ -1,0 +1,122 @@
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    IconButton,
+    TextField,
+  } from '@mui/material';
+  import { Close ,Send } from '@mui/icons-material';
+import { useRef} from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { observer } from 'mobx-react';
+import userStore from '../../store/userStore/userStore';
+import React from 'react';
+
+
+  const ChangePassword = () => {
+    useEffect(()=>{},[])
+    const user=userStore.user;
+    const currentPassRef = useRef();
+    const newPass1Ref = useRef();
+    const newPass2Ref = useRef();
+    const navigate = useNavigate();
+    const handleClose = () => {
+   navigate ('/')
+    };
+
+    const handleSubmit = async(e) => {
+      e.preventDefault();
+      const currentPassword = currentPassRef.current.value;
+      const newPass1=newPass1Ref.current.value;
+      const newPass2=newPass2Ref.current.value;
+      if(newPass1==newPass2)
+      {
+       
+      const bodyData={email:user.email,password:currentPassword,newpassword:newPass1}
+      userStore.changePassword(bodyData)
+      console.log(bodyData);
+    }}
+      
+    return (
+      <Dialog open={true} onClose={handleClose }>
+        <DialogTitle>
+          Profile
+          <IconButton
+            sx={{
+              position: 'absolute',
+              top: 8,
+              right: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+            onClick={handleClose}
+          >
+            <Close />
+          </IconButton>
+        </DialogTitle>
+        <form onSubmit={handleSubmit}>
+          <DialogContent dividers>
+            <DialogContentText>
+              You can change your password
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="normal"
+              variant="standard"
+              id="email"
+              label="Email"
+              type="text"
+              fullWidth disabled
+              defaultValue={user?.email}
+            />
+              <TextField
+              autoFocus
+              margin="normal"
+              variant="standard"
+              id="currentPass"
+              label="Current Password"
+              type="password"
+              fullWidth
+              inputRef={currentPassRef}
+              inputProps={{ minLength: 6 }}
+              required
+            /> 
+             <TextField
+              autoFocus
+              margin="normal"
+              variant="standard"
+              id="newPass1"
+              label="New Password"
+              type="password"
+              fullWidth
+              inputRef={newPass1Ref}
+              inputProps={{ minLength: 6 }}
+              required
+            /> 
+            <TextField
+              autoFocus
+              margin="normal"
+              variant="standard"
+              id="newPass2"
+              label="New Password Again"
+              type="password"
+              fullWidth
+              inputRef={newPass2Ref}
+              inputProps={{ minLength: 6 }}
+              required
+            />   
+          </DialogContent>
+          <DialogActions sx={{ px: '19px' }}>
+            <Button type="submit" variant="contained" endIcon={<Send />}>
+            Change Password
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
+    );
+  };
+
+  export default observer(ChangePassword);
