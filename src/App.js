@@ -1,5 +1,6 @@
 
 import './App.css';
+import React from 'react';
 import RegistrationPage from './pages/Registration/RegistrationPage/RegistrationPage';
 import LoginPage from './pages/Login/LoginPage/LoginPage';
 import Profile from './components/user/profile/Profile';

@@ -28,6 +28,7 @@ import userStore from '../../../store/userStore/userStore';
 import CategoryList from '../CategoryList/CategoryList';
 import Main from '../Main/Main';
 import UserList from '../UserList/UserList';
+import React from 'react';
   const drawerWidth = 240;
   
   const openedMixin = (theme) => ({
@@ -153,18 +154,18 @@ import UserList from '../UserList/UserList';
           </List>
           <Divider />
           <Box sx={{ mx: 'auto', mt: 3, mb: 1 }}>
-            <Tooltip title={user?.name || ''}>
+            <Tooltip title={user.name || ''}>
               <Avatar
-                src={user?.img_url}
+                src={user.img_url}
                 {...(open && { sx: { width: 100, height: 100 } })}
               />
             </Tooltip>
           </Box>
           <Box sx={{ textAlign: 'center' }}>
-            {open && <Typography>{user?.name}</Typography>}
-            <Typography variant="body2">{user?.role || 'role'}</Typography>
+            {open && <Typography>{user.name}</Typography>}
+            <Typography variant="body2">{user.role || 'role'}</Typography>
             {open && (
-              <Typography variant="body2">{user?.email}</Typography>
+              <Typography variant="body2">{user.email}</Typography>
             )}
             <Tooltip title="Logout" sx={{ mt: 1 }}>
               <IconButton onClick={handleLogout}>

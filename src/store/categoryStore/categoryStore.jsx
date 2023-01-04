@@ -22,6 +22,7 @@ class Category {
     console.log(url);
     try {
       let resp = await doApiMethod(url, "POST", newRow);
+      console.log(resp);
     } catch (err) {
       console.log(err.response);
       alertStore.set('Message','There problem, or you try to change superAdmin to user', true);
@@ -32,6 +33,7 @@ class Category {
     let url = API_URL + "/categories/" + updatedRow.category_url;
     try {
       let resp = await doApiMethod(url, "PATCH", updatedRow);
+      console.log(resp);
     } catch (err) {
       console.log(err.response);
       alertStore.set('Message','There problem, or you try to change superAdmin to user', true);
@@ -41,6 +43,7 @@ class Category {
     let url = API_URL + "/categories/" + category_url;
     try {
       let resp = await doApiMethod(url, "delete");
+      console.log(resp);
     } catch (err) {
       console.log(err.response);
       alertStore.set('Message','There problem, or you try to change superAdmin to user', true);

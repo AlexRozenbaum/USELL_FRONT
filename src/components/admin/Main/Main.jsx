@@ -76,11 +76,11 @@ const Main = ({ setSelectedLink, link }) => {
               <Box key={user._id}>
                 <ListItem>
                   <ListItemAvatar>
-                    <Avatar alt={user?.name} src={user?.img_url} />
+                    <Avatar alt={user.name} src={user.img_url} />
                   </ListItemAvatar>
                   <ListItemText
-                    primary={user?.name}
-                    secondary={`Time Created: ${moment(user?.date_created).format(
+                    primary={user.name}
+                    secondary={`Time Created: ${moment(user.date_created).format(
                       'YYYY-MM-DD H:mm:ss'
                     )}`}
                   />
@@ -99,14 +99,14 @@ const Main = ({ setSelectedLink, link }) => {
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar
-                      alt={category?.name}
-                      src={category?.img_url}
+                      alt={category.name}
+                      src={category.img_url}
                       variant="rounded"
                     />
                   </ListItemAvatar>
                   <ListItemText
-                    primary={category?.name}
-                    secondary={`Added: ${moment(category?.date_created).format(
+                    primary={category.name}
+                    secondary={`Added: ${moment(category.date_created).format(
                         'YYYY-MM-DD H:mm:ss'
                       )}`}
                   />

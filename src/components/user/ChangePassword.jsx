@@ -15,8 +15,6 @@ import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import userStore from '../../store/userStore/userStore';
 import React from 'react';
-
-
   const ChangePassword = () => {
     useEffect(()=>{},[])
     const user=userStore.user;
@@ -70,7 +68,7 @@ import React from 'react';
               label="Email"
               type="text"
               fullWidth disabled
-              defaultValue={user?.email}
+              defaultValue={user.email}
             />
               <TextField
               autoFocus
@@ -119,4 +117,4 @@ import React from 'react';
     );
   };
 
-  export default observer(ChangePassword);
+  export default observer(ChangePassword)

@@ -20,7 +20,7 @@ import DateService from '../../../services/DateService/DateService';
 import alertStore from '../../../store/alertStore/alertStore';
 import { toJS } from 'mobx';
 import MyAlert from '../../../MyAlert/MyAlert';
-
+import React from 'react';
 
 
   const Profile = () => {
@@ -97,7 +97,7 @@ import MyAlert from '../../../MyAlert/MyAlert';
               inputRef={nameRef}
               inputProps={{ minLength: 2 }}
               required
-              defaultValue={user?.name}
+              defaultValue={user.name}
             />
             <TextField
               autoFocus
@@ -107,7 +107,7 @@ import MyAlert from '../../../MyAlert/MyAlert';
               label="Email"
               type="text"
               fullWidth disabled
-              defaultValue={user?.email}
+              defaultValue={user.email}
             />
                 <TextField
               autoFocus
@@ -120,14 +120,14 @@ import MyAlert from '../../../MyAlert/MyAlert';
               inputRef={phoneRef}
               inputProps={{ minLength: 2 }}
               required
-              defaultValue={user?.phone}
+              defaultValue={user.phone}
             />
              <TextField
           id="birth_date"
           label="Birthday"
          type="date"
          inputRef={birth_dateRef}
-         defaultValue={DateService(user?.birth_date)}
+         defaultValue={DateService(user.birth_date)}
          InputLabelProps={{
           shrink: true,
        }}
@@ -144,7 +144,7 @@ import MyAlert from '../../../MyAlert/MyAlert';
               inputRef={infoRef}
               inputProps={{ minLength: 2 }}
               required
-              defaultValue={user?.info}
+              defaultValue={user.info}
             />
                 <TextField
               autoFocus
@@ -157,7 +157,7 @@ import MyAlert from '../../../MyAlert/MyAlert';
               inputRef={locationRef}
               inputProps={{ minLength: 2 }}
               required
-              defaultValue={user?.location}
+              defaultValue={user.location}
             />
               <TextField
               autoFocus
@@ -170,7 +170,7 @@ import MyAlert from '../../../MyAlert/MyAlert';
               inputRef={nicknameRef}
               inputProps={{ minLength: 2 }}
               required
-              defaultValue={user?.nickname}
+              defaultValue={user.nickname}
             />
             <label htmlFor="profilePhoto">
               <input
@@ -181,7 +181,7 @@ import MyAlert from '../../../MyAlert/MyAlert';
                  onChange={handleChange}
               />
               <Avatar
-                src={selectedFile?selectedFile:user?.img_url}
+                src={selectedFile?selectedFile:user.img_url}
                 sx={{ width: 75, height: 75, cursor: 'pointer' }}
               />
             </label>

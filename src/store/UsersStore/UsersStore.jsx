@@ -22,6 +22,7 @@ class Users {
     let url = API_URL + "/users/change" + field + "/" + id;
     try {
       let resp = await doApiMethod(url, "PATCH", bodyData);
+      console.log(resp);
     } catch (err) {
       console.log(err.response);
       alertStore.set('There problem, or you try to change superAdmin to user', true);

@@ -1,4 +1,4 @@
-import { AddCircle, Dashboard, Mail, Notifications, ShoppingBag, ShoppingCart } from '@mui/icons-material';
+import { AddCircle, Dashboard, ShoppingBag, ShoppingCart } from '@mui/icons-material';
 import { Avatar, Badge, Box, IconButton, ListItemIcon, Tooltip } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import userStore from '../../store/userStore/userStore';
@@ -14,8 +14,8 @@ const UserIcons = () => {
    const authAdmin=(toJS(authStore.authAdmin)=== "true");
    const authUser= (toJS(authStore.authUser)=== "true");
  const user=userStore.user;
-const wishlength= user?.wishlist?.length ;
-const lotlength= user?.lotlist?.length ;
+const wishlength= user.wishlist.length ;
+const lotlength= user.lotlist.length ;
   const [anchorUserMenu, setAnchorUserMenu] = useState(null);
 const navigate=useNavigate();
   return (
@@ -55,8 +55,8 @@ const navigate=useNavigate();
           </Tooltip>}</>}
       <Tooltip title="Open User Settings">
         <IconButton onClick={(e) => setAnchorUserMenu(e.currentTarget)}>
-          <Avatar src={user?.img_url} alt={user?.name}>
-            {user?.name?.charAt(0).toUpperCase()}
+          <Avatar src={user.img_url} alt={user.name}>
+            {user.name.charAt(0).toUpperCase()}
           </Avatar>
         </IconButton>
       </Tooltip>

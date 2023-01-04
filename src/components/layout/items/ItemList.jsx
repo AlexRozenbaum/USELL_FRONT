@@ -19,7 +19,7 @@ function ItemList(props) {
   const [render, setRender] = useState(false);
   const category=props.category
   const [isLoading, setIsLoading] = useState(false);
-  const searchQuery=props?.searchQuery;
+  const searchQuery=props.searchQuery;
   const [countPages,setcountPages] = useState(1);
   const [currentPage,setcurrentPage] = useState(1);
   useEffect(() => {
@@ -33,7 +33,7 @@ function ItemList(props) {
     console.log(props.authUser)
     if (props.authUser&&props.myitems) {
       try { 
-        let  url = API_URL + "/lots/myitems"+"?&&page="+currentPage; 
+        let  url = API_URL.concat ("/lots/myitems","?&&page=",currentPage); 
         let resp = await doApiGet(url);
         console.log(resp.data.data)
        setcountPages(Math.ceil((resp.data.count)/10))
@@ -50,7 +50,7 @@ function ItemList(props) {
     try{
       const items = [];
       for (const element of lotlist) {
-        let  url = API_URL + "/lots/byId/" + element.item_id;
+        let  url = API_URL.concat ( "/lots/byId/" , element.item_id);
        const resp = await doApiGet(url);
        items.push(resp.data);
       }
@@ -68,7 +68,7 @@ function ItemList(props) {
       try{
         const items = [];
         for (const element of wishlist) {
-          let  url = API_URL + "/lots/byId/" + element;
+          let  url = API_URL.concat("/lots/byId/" , element);
          const resp = await doApiGet(url);
          items.push(resp.data);
         }
@@ -86,9 +86,9 @@ function ItemList(props) {
     {
       try {
        
-        let  url = API_URL + "/lots/"+"?&&s="+searchQuery+"&&category="+category+"&&page="+currentPage
+        let  url = API_URL.concat(  "/lots/","?&&s=",searchQuery,"&&category=",category,"&&page=",currentPage);
         let resp = await doApiGet(url);
-        let url_count=API_URL + "/lots/count/"+"?&&s="+searchQuery+"&&category="+category
+        let url_count=API_URL.concat( "/lots/count/","?&&s=",searchQuery,"&&category=",category);
         let resp_count= await doApiGet(url_count);
         const totalPages=(Math.ceil(resp_count.data.count/9))
         console.log(totalPages)

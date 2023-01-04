@@ -1,15 +1,15 @@
 import { Card, CardContent } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useStateIfMounted } from "use-state-if-mounted";
 import DateTimeDisplay from "./DateTimeDisplay";
-
+import React from "react";
 export default function CalculateTimeLeft(props) {
   let [timeLeft, setTimeLeft] = useStateIfMounted({});
   useEffect(() => {
 
 },[ setTimeLeft]);
 
-const timer = setTimeout(() => {
+ setTimeout(() => {
   setTimeLeft(timeLeft);
 }, 1000)
 

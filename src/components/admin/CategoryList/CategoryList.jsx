@@ -70,7 +70,7 @@ export default function FullFeaturedCrudGrid() {
   };
 
   const handleSaveClick = (category_url) => () => {
-    const row=rows.filter((row) => row.category_url == category_url)
+    //const row=rows.filter((row) => row.category_url === category_url)
     setRowModesModel({ ...rowModesModel, [category_url]: { mode: GridRowModes.View } });
   };
 
@@ -111,7 +111,7 @@ export default function FullFeaturedCrudGrid() {
       width: 100,
       cellClassName: 'actions',
       getActions: ({id}) => {
-        const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+        const isInEditMode = rowModesModel[id].mode === GridRowModes.Edit;
 
         if (isInEditMode) {
           return [

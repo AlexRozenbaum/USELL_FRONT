@@ -1,4 +1,4 @@
-import { Dashboard, Login, Logout, Password, Settings, Work } from '@mui/icons-material';
+import { Dashboard, Logout, Password, Settings, Work } from '@mui/icons-material';
 import { ListItemIcon, Menu, MenuItem } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -72,7 +72,7 @@ const navigate = useNavigate();
         </MenuItem> )}
         
         {auth &&( <MenuItem
-           onClick={() => (alertStore.set('','',false),userStore.deleteUser(),authStore.deleteAuth(),navigate('/'))
+           onClick={() => {alertStore.set('','',false);userStore.deleteUser();authStore.deleteAuth();navigate('/');}
            }
         >
           <ListItemIcon>

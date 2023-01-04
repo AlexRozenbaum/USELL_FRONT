@@ -2,7 +2,6 @@ import { API_URL, TOKEN_KEY } from '../../utils/constants/url.constants';
 
 
 export const upload=async(base64EncodedImage,preset,_id)=> {
-     {
         try {
               await fetch(API_URL+'/cloud/api/upload', {
                 method: 'POST',
@@ -16,5 +15,4 @@ export const upload=async(base64EncodedImage,preset,_id)=> {
             console.error(err);
             alert('Something went wrong!');
         }
-}
 }

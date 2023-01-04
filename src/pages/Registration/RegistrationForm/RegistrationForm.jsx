@@ -98,8 +98,8 @@ export default function RegistrationForm() {
                      minLength: {value:2,
                      message:"At least 2 characters"}
                   })}
-                  error={!!errors?.name}
-                  helperText={errors?.name ? errors.name.message : null}
+                  error={!!errors.name}
+                  helperText={errors.name ? errors.name.message : null}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -117,8 +117,8 @@ export default function RegistrationForm() {
                       message: "Invalid email address",
                     },
                   })}
-                  error={!!errors?.email}
-                  helperText={errors?.email ? errors.email.message : null}
+                  error={!!errors.email}
+                  helperText={errors.email ? errors.email.message : null}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -135,8 +135,8 @@ export default function RegistrationForm() {
                     minLength: {value:2,
                       message:"At least 2 characters"}
                   })}
-                  error={!!errors?.password}
-                  helperText={errors?.password ? errors.password.message : null}
+                  error={!!errors.password}
+                  helperText={errors.password ? errors.password.message : null}
                   
                 />
               </Grid>
@@ -154,8 +154,8 @@ export default function RegistrationForm() {
                     minLength: {value:9,
                     message:"At least 9 characters"}
                   })}
-                  error={!!errors?.phone}
-                  helperText={errors?.phone ? errors.phone.message : null}
+                  error={!!errors.phone}
+                  helperText={errors.phone ? errors.phone.message : null}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -174,8 +174,8 @@ export default function RegistrationForm() {
                     required: "Required field",
                     minLength: 2
                   })}
-                  error={!!errors?.Date}
-                  helperText={errors?.Date ? errors.Date.message : null}
+                  error={!!errors.Date}
+                  helperText={errors.Date ? errors.Date.message : null}
                 />
               </Grid>
                <Grid item xs={12}>
@@ -192,8 +192,8 @@ export default function RegistrationForm() {
                     minLength: {value:2,
                       message:"At least 2 characters"}
                   })}
-                  error={!!errors?.location}
-                  helperText={errors?.location ? errors.location.message : null}
+                  error={!!errors.location}
+                  helperText={errors.location ? errors.location.message : null}
                 />
               </Grid>
               <Grid item xs={12} >
@@ -210,8 +210,8 @@ export default function RegistrationForm() {
                     minLength: {value:2,
                       message:"At least 2 characters"}
                   })}
-                  error={!!errors?.info}
-                  helperText={errors?.info ? errors.info.message : null}
+                  error={!!errors.info}
+                  helperText={errors.info ? errors.info.message : null}
                 />
               </Grid>
               <Grid item xs={12} >
@@ -228,8 +228,8 @@ export default function RegistrationForm() {
                     minLength: {value:2,
                       message:"At least 2 characters"}
                   })}
-                  error={!!errors?.nickname}
-                  helperText={errors?.nickname ? errors.nickname.message : null}
+                  error={!!errors.nickname}
+                  helperText={errors.nickname ? errors.nickname.message : null}
                 />
               </Grid>
               

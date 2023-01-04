@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   Dialog,
@@ -26,6 +25,7 @@ import { useParams } from "react-router";
 import categoryStore from "../../../store/categoryStore/categoryStore";
 import { toJS } from "mobx";
 import Loading from "../../Loading/Loading";
+import React from 'react';
 const EditItem = () => {
   const {id} = useParams();
   useEffect (() => {

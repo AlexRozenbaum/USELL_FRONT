@@ -152,8 +152,8 @@ function AddItem() {
                  minLength: {value:2,
                  message:"At least 2 characters"}
               })}
-              error={!!errors?.name}
-              helperText={errors?.name ? errors.name.message : null}
+              error={!!errors.name}
+              helperText={errors.name ? errors.name.message : null}
             />
             <TextField
               margin="normal"
@@ -168,8 +168,8 @@ function AddItem() {
                  minLength: {value:2,
                  message:"At least 2 characters"}
               })}
-              error={!!errors?.info}
-              helperText={errors?.info ? errors.info.message : null}
+              error={!!errors.info}
+              helperText={errors.info ? errors.info.message : null}
             />
             <InputLabel id="LabelHand">Hand</InputLabel>
             <Select
@@ -221,8 +221,8 @@ function AddItem() {
                  minLength: {value:1,
                  message:"At least 1 characters"}
               })}
-              error={!!errors?.start_price}
-              helperText={errors?.start_price ? errors.start_price.message : null}
+              error={!!errors.start_price}
+              helperText={errors.start_price ? errors.start_price.message : null}
             />
             <InputLabel id="ItemLot">Sell as</InputLabel>
               <Select
@@ -268,8 +268,8 @@ function AddItem() {
                  minLength: {value:2,
                  message:"At least 2 characters"}
               })}
-              error={!!errors?.location}
-              helperText={errors?.location ? errors.location.message : null}
+              error={!!errors.location}
+              helperText={errors.location ? errors.location.message : null}
             />
             <TextField
               margin="normal"
@@ -283,8 +283,8 @@ function AddItem() {
                  minLength: {value:8,
                  message:"At least 8 characters"}
               })}
-              error={!!errors?.phone}
-              helperText={errors?.phone ? errors.phone.message : null}
+              error={!!errors.phone}
+              helperText={errors.phone ? errors.phone.message : null}
             />
              <label htmlFor="itemPhoto">
               <input

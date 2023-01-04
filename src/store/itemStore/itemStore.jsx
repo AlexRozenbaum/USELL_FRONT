@@ -22,6 +22,7 @@ class Item {
     let url = API_URL + "/lots/" + id;
     try {
       let resp = await doApiMethod(url, "PATCH", bodyData);
+      console.log(resp);
     } catch (err) {
       console.log(err.response);
       alert("There problem, or you try to change superAdmin to user");
