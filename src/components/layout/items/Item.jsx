@@ -133,7 +133,7 @@ return(
         action={
           <>
             {(item.item_lot===false ||item.item_lot===null) && item.user_id===user._id&&<IconMenu editId={item._id} delete={DeleteItem} question={"Delete item?"}/>}
-            {((item.item_lot===true&&(item.winner_user_id!==user._id))||(item.item_lot===false))&&(userStore.user?.wishlist?.includes(item._id))&& <IconMenu delete={DeleteItemFromWishlist} question={"Delete item from wishlist?"}/> }
+            {((item.item_lot===true&&(item.winner_user_id!==user._id))||(item.item_lot===false))&&(userStore.user.wishlist.includes(item._id))&& <IconMenu delete={DeleteItemFromWishlist} question={"Delete item from wishlist?"}/> }
           </>
         }
         title={item.name}
