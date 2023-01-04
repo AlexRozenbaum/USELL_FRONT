@@ -239,7 +239,7 @@ function AddItem() {
               <MenuItem value={false}>Regular Item</MenuItem>
               <MenuItem value={true}>Sell as Lot</MenuItem>
             </Select>
-            {item_lot==true &&
+            {item_lot===true &&
             (<>
             <InputLabel id="DateExpired">Date Expired</InputLabel>
               <Select

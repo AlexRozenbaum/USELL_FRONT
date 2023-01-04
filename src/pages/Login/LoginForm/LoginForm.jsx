@@ -74,11 +74,11 @@ function LoginForm() {
       const user = toJS(userStore.user);
        const link =(user.activationLink)
        console.log(user.activateLink==='')
-      if (user.active==false&&user.activateLink!=='') 
+      if (user.active===false&&user.activateLink!=='') 
       {
         alertStore.set('NOT ACTIVATED','Activate your link in mail and sign in after this ', true);
       }
-      if (user.active==false&&user.activateLink==='') 
+      if (user.active===false&&user.activateLink==='') 
       {
         alertStore.set('BANNED','You banned ,contact administrators', true);
       }

@@ -19,7 +19,7 @@ function SelectEditInputCell(props) {
     usersStore.updateUser(id,field,event.target.value )
     apiRef.current.stopCellEditMode({ id, field });
   };
-if(field=='role')
+if(field==='role')
   return (
     <Select
       value={value}
@@ -32,7 +32,7 @@ if(field=='role')
       <option>admin</option>
       <option>user</option>
     </Select>)
-    if(field=='active')
+    if(field==='active')
     return (
     <Select
       value={value}

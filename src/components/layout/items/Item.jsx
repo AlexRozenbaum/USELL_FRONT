@@ -62,9 +62,9 @@ const ExpandMore = styled((props) => {
     e.target.value=MIN_BID
 };
   let defaultwinner='';
- if((item.winner_price==null)&&(user._id==item.user_id))
+ if((item.winner_price===null)&&(user._id==item.user_id))
   {defaultwinner='NO ONE YET';}
-  if((item.winner_price==null)&&(user._id!==item.user_id))
+  if((item.winner_price===null)&&(user._id!==item.user_id))
  {defaultwinner='YOU CAN BE FIRST';} 
   if((item.winner_price!==null))
    {defaultwinner=item.winner_price;}
@@ -135,7 +135,7 @@ return(
         }
         action={
           <>
-            {(item.item_lot==false ||item.item_lot==null) && item.user_id==user._id&&<IconMenu editId={item._id} delete={DeleteItem} question={"Delete item?"}/>}
+            {(item.item_lot===false ||item.item_lot===null) && item.user_id===user._id&&<IconMenu editId={item._id} delete={DeleteItem} question={"Delete item?"}/>}
             {((item.item_lot===true&&(item.winner_user_id!==user._id))||(item.item_lot===false))&&(userStore.user.wishlist?.includes(item._id))&& <IconMenu delete={DeleteItemFromWishlist} question={"Delete item from wishlist?"}/> }
           </>
         }

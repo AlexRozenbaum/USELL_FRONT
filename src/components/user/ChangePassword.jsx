@@ -33,7 +33,7 @@ import React from 'react';
       const currentPassword = currentPassRef.current.value;
       const newPass1=newPass1Ref.current.value;
       const newPass2=newPass2Ref.current.value;
-      if(newPass1==newPass2)
+      if(newPass1===newPass2)
       {
        
       const bodyData={email:user.email,password:currentPassword,newpassword:newPass1}
