@@ -1,4 +1,4 @@
-import { Add, Favorite, FavoriteBorder, MoreVert, Share } from "@mui/icons-material";
+import { Add,  Share } from "@mui/icons-material";
 import {
   Avatar,
   Box,
@@ -8,12 +8,9 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
-  Checkbox,
   Collapse,
   IconButton,
-  ListItemIcon,
   TextField,
-  Tooltip,
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -52,7 +49,6 @@ const ExpandMore = styled((props) => {
   useEffect(() => {
   }, [user,state]);
   const item=props.item;
-  const auth=props.authUser;
   console.log(((item.item_lot===true&&(item.winner_user_id!==user._id))||(item.item_lot===false)))
   const winner_priceRef = useRef();
   const MIN_BID=(item.winner_price==null?item.start_price:item.winner_price)
@@ -62,7 +58,7 @@ const ExpandMore = styled((props) => {
     e.target.value=MIN_BID
 };
   let defaultwinner='';
- if((item.winner_price===null)&&(user._id==item.user_id))
+ if((item.winner_price===null)&&(user._id===item.user_id))
   {defaultwinner='NO ONE YET';}
   if((item.winner_price===null)&&(user._id!==item.user_id))
  {defaultwinner='YOU CAN BE FIRST';} 
@@ -71,7 +67,7 @@ const ExpandMore = styled((props) => {
   const PlaceBid =async(e) =>
    {
     e.preventDefault();
-    if (user._id!=item.user_id)
+    if (user._id!==item.user_id)
     {
      
     const winner_price=winner_priceRef.current.value;
@@ -140,7 +136,7 @@ return(
           </>
         }
         title={item.name}
-        subheader={"published " + DateService(item.date_created)+`${user._id==item.user_id?" MY ITEM": ""}`} 
+        subheader={"published " + DateService(item.date_created)+`${user._id===item.user_id?" MY ITEM": ""}`} 
       />
       <CardMedia
         component="img"
@@ -212,7 +208,7 @@ return(
           }} label={ <Typography fontWeight={"Bold"}  >
         The winner bid:</Typography>} variant="filled" fontStyle="italic" defaultValue={defaultwinner} />
         </Box>
-        {user._id!=item.user_id&&(props.authUser)&&
+        {user._id!==item.user_id&&(props.authUser)&&
           < Box  align="left" >
           <TextField id="filled-basic" fullWidth  InputProps={{
             readOnly: true,
@@ -227,7 +223,7 @@ return(
       </CardContent></Collapse>
       <CardActions disableSpacing>
       <MyBasicPopover icon={<Add/>}  title="add to your wishlist" function={ () => {
-        if (userStore.user.wishlist.indexOf(item._id) === -1 && user._id!=item.user_id)
+        if (userStore.user.wishlist.indexOf(item._id) === -1 && user._id!==item.user_id)
         {
         userStore.user.wishlist.push(item._id);
         userStore.updateUser();

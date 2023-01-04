@@ -19,21 +19,8 @@ import { doApiMethod } from '../../../services/ApiService/ApiService';
 import { useForm } from "react-hook-form";
 import MyAlert from '../../../MyAlert/MyAlert';
 import { useEffect } from 'react';
-import { useState } from 'react';
 import alertStore from '../../../store/alertStore/alertStore';
 import { toJS } from 'mobx';
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const theme = createTheme();
 

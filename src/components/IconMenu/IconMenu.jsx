@@ -7,9 +7,7 @@ import { Delete, MoreVert } from "@mui/icons-material";
 import Edit from "@mui/icons-material/Edit";
 import AlertDialog from "../AlertDialog/AlertDialog";
 import { useNavigate } from "react-router-dom";
-import itemStore from "../../store/itemStore/itemStore";
 import { observer } from "mobx-react";
-import { toJS } from "mobx";
 import { useEffect } from "react";
 const ITEM_HEIGHT = 48;
  function IconMenu(props) {

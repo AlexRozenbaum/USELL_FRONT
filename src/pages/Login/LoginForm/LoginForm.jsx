@@ -23,28 +23,9 @@ import userStore from "../../../store/userStore/userStore";
 import { observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import MyAlert from "../../../MyAlert/MyAlert";
-import { useState } from "react";
 import { useEffect } from "react";
 import alertStore from "../../../store/alertStore/alertStore";
 import { toJS } from "mobx";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const theme = createTheme();
 
@@ -72,7 +53,6 @@ function LoginForm() {
       userStore.user = data.userclone._doc;
       localStorage.setItem(TOKEN_KEY, data.token);
       const user = toJS(userStore.user);
-       const link =(user.activationLink)
        console.log(user.activateLink==='')
       if (user.active===false&&user.activateLink!=='') 
       {

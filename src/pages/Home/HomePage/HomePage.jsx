@@ -1,4 +1,4 @@
-import { Box, FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
+import {  FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
 import { toJS } from "mobx";
 import React, { useEffect, useState } from "react";
 import ItemList from "../../../components/layout/items/ItemList";
@@ -32,16 +32,14 @@ function HomePage(props) {
                alignItems:'center',
                alignContent:'center',
                justifyContent: "center",height: '100%',justifyItems:'center',
-        width: 400,
-        height: 60}} >
+        width: 400}} >
                 <SearchBar   setSearchQuery={setSearchQuery} />
               </Grid><FormControl>
               <Grid item xs={6}  sx={{
                display: "flex",
                alignContent:'center',
                justifyContent: "center",height: '100%',justifyItems:'center',
-        width: 250,
-        height: 60}}  >
+        width: 250}}  >
           
                 <InputLabel id="LabelCategory">Search by Category</InputLabel>
                 <Select

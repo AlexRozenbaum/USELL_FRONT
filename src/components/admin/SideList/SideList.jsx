@@ -1,10 +1,7 @@
 import {
     ChevronLeft,
     Dashboard,
-    KingBed,
     Logout,
-    MarkChatUnread,
-    NotificationsActive,
     PeopleAlt,
     Category
   } from '@mui/icons-material';

@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   AppBar,
-  Box,
   Button,
   Container,
-  IconButton,
   Toolbar,
   Typography,
 } from '@mui/material';
-import { Lock, Menu, PersonAddAlt1 } from '@mui/icons-material';
+import { Lock,  PersonAddAlt1 } from '@mui/icons-material';
 import UserIcons from '../../../user/UserIcons';
 import { useNavigate } from 'react-router-dom';
 import { toJS } from 'mobx';
@@ -17,7 +15,6 @@ import { observer } from 'mobx-react';
 import myLogo from "../../../../assets/photos/Usell.png"
 const NavBar = () => {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
   const authAdmin=(toJS(authStore.authAdmin)=== "true");
    const authUser= (toJS(authStore.authUser)=== "true");
    const auth= authAdmin || authUser ;
@@ -31,7 +28,7 @@ const NavBar = () => {
         <Container maxWidth="lg"> 
             
           <Toolbar disableGutters>
-          <img
+          <img alt='logo'
                 src={myLogo}
                 sx={{ width:20, height:40, cursor: 'pointer',border: 0.6  }}
                 onClick={() => navigate ('/')}

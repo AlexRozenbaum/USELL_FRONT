@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -12,7 +11,6 @@ import Typography from '@mui/material/Typography';
 import alertStore from '../store/alertStore/alertStore';
 import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
-import { useEffect } from 'react';
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),

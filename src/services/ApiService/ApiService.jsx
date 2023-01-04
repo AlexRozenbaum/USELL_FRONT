@@ -1,6 +1,5 @@
 import axios from "axios";
 import { TOKEN_KEY } from "../../utils/constants/url.constants";
-import { LocalStorage } from "../LocalStorage/LocalStorage.service";
 export const doApiGet = async(_url) => {
   try{
     let resp = await axios.get(_url,{

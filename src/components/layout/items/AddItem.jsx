@@ -7,11 +7,10 @@ import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { API_URL, TOKEN_KEY } from "../../../utils/constants/url.constants";
+import { API_URL } from "../../../utils/constants/url.constants";
 import userStore from "../../../store/userStore/userStore";
 import { observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
