@@ -40,14 +40,14 @@ const UserIcons = () => {
         <>
           <Tooltip title="Check your lotlist and bids">
             <IconButton size="large" color="inherit">
-              <Badge badgeContent={auth? user.wishlist.length : ""}>
+              <Badge badgeContent={auth? user.lotlist.length : ""}>
                 <ShoppingBag onClick={() => navigate("/user/mylotlist")} />
               </Badge>
             </IconButton>
           </Tooltip>
           <Tooltip title="Check your wishlist">
             <IconButton size="large" color="inherit">
-              <Badge badgeContent={auth? user.lotlist.length : ""}>
+              <Badge badgeContent={auth? user.wishlist.length : ""}>
                 <ShoppingCart onClick={() => navigate("/user/mywishlist")} />
               </Badge>
             </IconButton>

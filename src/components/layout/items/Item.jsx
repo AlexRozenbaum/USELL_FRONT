@@ -119,8 +119,6 @@ const ExpandMore = styled((props) => {
     userStore.user.wishlist.remove(item._id)
     userStore.updateUser();
 };
-
-
 return(
     <Card sx={{ margin: 5 }}  >
       <CardHeader
