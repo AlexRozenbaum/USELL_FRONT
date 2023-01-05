@@ -28,7 +28,7 @@ const UserIcons = () => {
   const user = userStore.user;
   let wishlength = 0;
   let lotlength = 0;
-  if (authUser) {
+  if (user) {
     wishlength = user.wishlist.length;
     lotlength = user.lotlist.length;
   }
