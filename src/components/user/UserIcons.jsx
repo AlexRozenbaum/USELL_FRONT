@@ -29,8 +29,8 @@ const UserIcons = () => {
   let wishlength = 0;
   let lotlength = 0;
   if (user) {
-    wishlength = user.wishlist.length;
-    lotlength = user.lotlist.length;
+   // wishlength = user.wishlist.length;
+    //lotlength = user.lotlist.length;
   }
 
   const [anchorUserMenu, setAnchorUserMenu] = useState(null);
