@@ -28,13 +28,14 @@ import Loading from "../../Loading/Loading";
 import React from 'react';
 const EditItem = () => {
   const {id} = useParams();
+  const item = toJS(itemStore.item);
   useEffect (() => {
     itemStore.fetchItem(id);
     categoryStore.fetchCategories();
   }, [item]);
   const all_categories = toJS(categoryStore.categories);
   const [selectedFile, setSelectedFile] = useState();
-  const item = toJS(itemStore.item);
+
 
   const [category, setCategory] = useState(item.category_url);
   const [hand, setHand] = useState(item.hand);
