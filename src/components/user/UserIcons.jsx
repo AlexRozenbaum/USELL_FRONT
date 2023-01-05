@@ -25,6 +25,7 @@ const UserIcons = () => {
   }, []);
   const authAdmin = toJS(authStore.authAdmin) === "true";
   const authUser = toJS(authStore.authUser) === "true";
+  const auth=authUser||authAdmin;
   const user = userStore.user;
   let wishlength = 0;
   let lotlength = 0;
@@ -36,6 +37,7 @@ const UserIcons = () => {
   const [anchorUserMenu, setAnchorUserMenu] = useState(null);
   const navigate = useNavigate();
   return (
+    <>{auth&&
     <Box>
       {authUser ? (
         <>
@@ -83,7 +85,7 @@ const UserIcons = () => {
         </IconButton>
       </Tooltip>
       {<UserMenu {...{ anchorUserMenu, setAnchorUserMenu }} />}
-    </Box>
+    </Box>}</>
   );
 };
 
