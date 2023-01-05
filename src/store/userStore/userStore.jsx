@@ -55,7 +55,7 @@ class User {
     }
   };
   deleteUser = () => {
-    this.user = null;
+    this.user = {};
   };
 }
 const userStore = new User();

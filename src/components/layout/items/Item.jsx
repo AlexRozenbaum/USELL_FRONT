@@ -47,10 +47,10 @@ const ExpandMore = styled((props) => {
     setExpanded(!expanded);
   };
   const user=toJS(userStore.user);
+
   useEffect(() => {
   }, [user,state]);
   const item=props.item;
-  console.log(((item.item_lot===true&&(item.winner_user_id!==user._id))||(item.item_lot===false)))
   const winner_priceRef = useRef();
   const MIN_BID=(item.winner_price==null?item.start_price:item.winner_price)
   const handleOnInput = (e) => {
@@ -130,7 +130,7 @@ return(
             {item.name.slice(0,1)}
           </Avatar>
         }
-        action={
+        action={props.authUser&&
           <>
             {(item.item_lot===false ||item.item_lot===null) && item.user_id===user._id&&<IconMenu editId={item._id} delete={DeleteItem} question={"Delete item?"}/>}
             {((item.item_lot===true&&(item.winner_user_id!==user._id))||(item.item_lot===false))&&(userStore.user.wishlist.includes(item._id))&& <IconMenu delete={DeleteItemFromWishlist} question={"Delete item from wishlist?"}/> }
