@@ -46,8 +46,10 @@ const EditItem = () => {
   const start_priceRef = useRef();
   const navigate = useNavigate();
   const handleClose = () => {
-    navigate("/user/myitems");
     itemStore.deleteItem();
+    setTimeout(() => {
+      navigate("/user/myitems");
+    }, 2000);
   };
   const handleChangeHand = (event) => {
     setHand(event.target.value);
@@ -93,8 +95,11 @@ const EditItem = () => {
     if (selectedFile) {
       await upload(selectedFile, "items_preset", item._id);
     }
-    navigate("/user/myitems");
     itemStore.deleteItem();
+    setTimeout(() => {
+      navigate("/user/myitems");
+    }, 2000);
+    
   };
   return (
    <> {(Object.keys(item).length === 0)?<Loading/>:
