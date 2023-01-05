@@ -46,8 +46,9 @@ const EditItem = () => {
   const start_priceRef = useRef();
   const navigate = useNavigate();
   const handleClose = () => {
-    itemStore.deleteItem();
+    
     setTimeout(() => {
+      itemStore.deleteItem();
       navigate("/user/myitems");
     }, 2000);
   };
@@ -95,8 +96,8 @@ const EditItem = () => {
     if (selectedFile) {
       await upload(selectedFile, "items_preset", item._id);
     }
-    itemStore.deleteItem();
     setTimeout(() => {
+      itemStore.deleteItem();
       navigate("/user/myitems");
     }, 2000);
     
