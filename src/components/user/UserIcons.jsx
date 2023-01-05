@@ -27,10 +27,10 @@ const UserIcons = () => {
   const authUser = toJS(authStore.authUser) === "true";
   const auth=authUser||authAdmin;
 
-  user = userStore.user;
+  const user = userStore.user;
 
-    wishlength = user.wishlist.length || 0;
-    lotlength = user.lotlist.length || 0 ;
+   const  wishlength = user.wishlist.length || 0;
+   const  lotlength = user.lotlist.length || 0 ;
   
 
   const [anchorUserMenu, setAnchorUserMenu] = useState(null);
