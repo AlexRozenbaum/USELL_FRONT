@@ -93,7 +93,6 @@ const EditItem = () => {
       await upload(selectedFile, "items_preset", item._id);
     }
     navigate("/user/myitems");
-    itemStore.deleteItem();
 
   };
   return (
