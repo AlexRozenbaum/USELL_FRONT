@@ -27,7 +27,7 @@ const UserIcons = () => {
   const authUser = toJS(authStore.authUser) === "true";
   const auth=authUser||authAdmin;
 
-  const user = userStore.user;
+  const user = toJS(userStore.user);
  
   
 
