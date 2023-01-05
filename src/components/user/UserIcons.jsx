@@ -28,9 +28,8 @@ const UserIcons = () => {
   const auth=authUser||authAdmin;
 
   const user = userStore.user;
-
-   const  wishlength = user.wishlist.length || 0;
-   const  lotlength = user.lotlist.length || 0 ;
+   const  wishlength = user?.wishlist.length || 0;
+   const  lotlength = user?.lotlist.length || 0 ;
   
 
   const [anchorUserMenu, setAnchorUserMenu] = useState(null);
