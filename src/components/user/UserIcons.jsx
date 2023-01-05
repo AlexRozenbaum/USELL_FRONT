@@ -26,14 +26,12 @@ const UserIcons = () => {
   const authAdmin = toJS(authStore.authAdmin) === "true";
   const authUser = toJS(authStore.authUser) === "true";
   const auth=authUser||authAdmin;
-  let user=undefined;
+
   user = userStore.user;
-  let wishlength = 0;
-  let lotlength = 0;
-  if (user) {
-    wishlength = user.wishlist.length;
-    lotlength = user.lotlist.length;
-  }
+
+    wishlength = user.wishlist.length || 0;
+    lotlength = user.lotlist.length || 0 ;
+  
 
   const [anchorUserMenu, setAnchorUserMenu] = useState(null);
   const navigate = useNavigate();
