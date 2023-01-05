@@ -46,7 +46,7 @@ const EditItem = () => {
   const navigate = useNavigate();
   const handleClose = () => {
     navigate("/user/myitems");
-    
+    itemStore.deleteItem();
   };
   const handleChangeHand = (event) => {
     setHand(event.target.value);
@@ -93,7 +93,7 @@ const EditItem = () => {
       await upload(selectedFile, "items_preset", item._id);
     }
     navigate("/user/myitems");
-
+    itemStore.deleteItem();
   };
   return (
    <> {(Object.keys(item).length === 0)?<Loading/>:
