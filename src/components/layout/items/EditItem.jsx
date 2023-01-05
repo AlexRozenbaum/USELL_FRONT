@@ -46,7 +46,7 @@ const EditItem = () => {
   const navigate = useNavigate();
   const handleClose = () => {
     navigate("/user/myitems");
-    itemStore.deleteItem();
+    
   };
   const handleChangeHand = (event) => {
     setHand(event.target.value);
