@@ -22,7 +22,7 @@ import authStore from "../../store/authStore/authStore";
 const UserIcons = () => {
   useEffect(() => {
     authStore.checkUser();
-  }, []);
+  }, [user]);
   const authAdmin = toJS(authStore.authAdmin) === "true";
   const authUser = toJS(authStore.authUser) === "true";
   const auth=authUser||authAdmin;
