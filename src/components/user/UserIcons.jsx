@@ -40,14 +40,14 @@ const UserIcons = () => {
         <>
           <Tooltip title="Check your lotlist and bids">
             <IconButton size="large" color="inherit">
-              <Badge badgeContent={user? user.wishlist.length : ""}>
+              <Badge badgeContent={auth? user.wishlist.length : ""}>
                 <ShoppingBag onClick={() => navigate("/user/mylotlist")} />
               </Badge>
             </IconButton>
           </Tooltip>
           <Tooltip title="Check your wishlist">
             <IconButton size="large" color="inherit">
-              <Badge badgeContent={user.lotlist.length? user.lotlist.length : ""}>
+              <Badge badgeContent={auth? user.lotlist.length : ""}>
                 <ShoppingCart onClick={() => navigate("/user/mywishlist")} />
               </Badge>
             </IconButton>
@@ -76,8 +76,8 @@ const UserIcons = () => {
       )}
       <Tooltip title="Open User Settings">
         <IconButton onClick={(e) => setAnchorUserMenu(e.currentTarget)}>
-          <Avatar src={user?user.img_url:""} alt={user?user.name:""}>
-            {user?user.name.charAt(0).toUpperCase():""}
+          <Avatar src={auth?user.img_url:""} alt={auth?user.name:""}>
+            {auth?user.name.charAt(0).toUpperCase():""}
           </Avatar>
         </IconButton>
       </Tooltip>
