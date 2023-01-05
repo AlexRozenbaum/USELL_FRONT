@@ -31,7 +31,7 @@ const EditItem = () => {
   useEffect (() => {
     itemStore.fetchItem(id);
     categoryStore.fetchCategories();
-  }, []);
+  }, [item]);
   const all_categories = toJS(categoryStore.categories);
   const [selectedFile, setSelectedFile] = useState();
   const item = toJS(itemStore.item);
