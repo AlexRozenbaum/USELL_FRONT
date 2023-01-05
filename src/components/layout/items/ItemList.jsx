@@ -30,7 +30,6 @@ function ItemList(props) {
   const lotlist = toJS(userStore.user.lotlist);
   const doApi = async () => {
     setIsLoading(true);
-    console.log(props.authUser)
     if (props.authUser&&props.myitems) {
       try { 
         let  url = API_URL.concat ("/lots/myitems","?&&page=",currentPage); 
@@ -72,8 +71,7 @@ function ItemList(props) {
          const resp = await doApiGet(url);
          items.push(resp.data);
         }
-       setcountPages(Math.ceil(items.length/9))
-        console.log(items)
+       setcountPages(Math.ceil(items.length/9));
       setItems(items);
       setIsLoading(false);}
       catch (err) {
@@ -91,7 +89,6 @@ function ItemList(props) {
         let url_count=API_URL.concat( "/lots/count/","?&&s=",searchQuery,"&&category=",category);
         let resp_count= await doApiGet(url_count);
         const totalPages=(Math.ceil(resp_count.data.count/9))
-        console.log(totalPages)
          setcountPages(totalPages);
          setItems(resp.data)
          setIsLoading(false);
@@ -101,7 +98,7 @@ function ItemList(props) {
       setIsLoading(false);
     }
   }
-  console.log(state)
+  
   };
   return (
     <div>

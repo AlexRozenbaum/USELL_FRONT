@@ -73,7 +73,6 @@ const ExpandMore = styled((props) => {
      
     const winner_price=winner_priceRef.current.value;
     const winner_user_id=user._id;
-     console.log(winner_user_id)
     const bodyData= {winner_user_id:winner_user_id,winner_price:winner_price}
     let url = API_URL+"/lots/bid/"+item.id;
     const index = userStore.user.lotlist.findIndex((e) => e.item_id === item.id);
@@ -120,7 +119,7 @@ const ExpandMore = styled((props) => {
     userStore.user.wishlist.remove(item._id)
     userStore.updateUser();
 };
-(console.log(user.nickname+" "+item.user_id+" "+user._id+item.item_lot))
+
 
 return(
     <Card sx={{ margin: 5 }}  >
