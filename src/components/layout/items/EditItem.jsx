@@ -92,7 +92,7 @@ const EditItem = () => {
       user_nickname: item.user_nickname,
       img_url: item.img_url,
     };
-    itemStore.updateItem(item._id, bodyData);
+    await itemStore.updateItem(item._id, bodyData);
     if (selectedFile) {
       await upload(selectedFile, "items_preset", item._id);
     }
