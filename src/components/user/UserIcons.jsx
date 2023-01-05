@@ -28,8 +28,7 @@ const UserIcons = () => {
   const auth=authUser||authAdmin;
 
   const user = userStore.user;
-   const  wishlength = user?.wishlist.length || 0;
-   const  lotlength = user?.lotlist.length || 0 ;
+ 
   
 
   const [anchorUserMenu, setAnchorUserMenu] = useState(null);
@@ -41,14 +40,14 @@ const UserIcons = () => {
         <>
           <Tooltip title="Check your lotlist and bids">
             <IconButton size="large" color="inherit">
-              <Badge badgeContent={lotlength ? lotlength : ""}>
+              <Badge badgeContent={user.wishlist.length? user.wishlist.length : ""}>
                 <ShoppingBag onClick={() => navigate("/user/mylotlist")} />
               </Badge>
             </IconButton>
           </Tooltip>
           <Tooltip title="Check your wishlist">
             <IconButton size="large" color="inherit">
-              <Badge badgeContent={wishlength ? wishlength : ""}>
+              <Badge badgeContent={user.lotlist.length? user.lotlist.length : ""}>
                 <ShoppingCart onClick={() => navigate("/user/mywishlist")} />
               </Badge>
             </IconButton>
