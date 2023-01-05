@@ -148,10 +148,10 @@ return(
         <Box  display={'flex'}   alignContent={'center'} alignItems={'center'} align="left" >
         
         <Typography fontWeight={"Bold"} style={{display: 'inline-block'}}> Category:</Typography>
-         <Typography style={{display: 'inline-block'}}> {item.categories[0].name}
+         <Typography style={{display: 'inline-block'}}> {item?item.categories[0].name:""}
         </Typography>
          {
-          <Avatar sx={{display: 'inline-block',marginLeft:2}} src= {item.categories[0].img_url}>
+          <Avatar sx={{display: 'inline-block',marginLeft:2}} src= {item?item.categories[0].img_url:""}>
           </Avatar>
         }
         </Box>
