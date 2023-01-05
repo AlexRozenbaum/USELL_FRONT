@@ -37,7 +37,6 @@ import React from 'react';
     const navigate = useNavigate();
     const handleClose = () => {
    navigate ('/')
-   userStore.deleteUser();
     };
     const handleChange =(e) => {
       const file = e.target.files[0];
