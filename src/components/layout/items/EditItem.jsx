@@ -35,8 +35,6 @@ const EditItem = () => {
   }, []);
   const all_categories = toJS(categoryStore.categories);
   const [selectedFile, setSelectedFile] = useState();
-
-
   const [category, setCategory] = useState(item.category_url);
   const [hand, setHand] = useState(item.hand);
   const nameRef = useRef();
@@ -163,7 +161,7 @@ const EditItem = () => {
             required
             defaultValue={item.phone}
           />
-          <FormControl fullWidth sx={{ m: 1 }}>
+       
             <InputLabel id="LabelHand">Hand</InputLabel>
             <Select
               labelId="LabelHand"
@@ -183,9 +181,9 @@ const EditItem = () => {
               <MenuItem value={4}>4</MenuItem>
               <MenuItem value={5}>5</MenuItem>
             </Select>
-          </FormControl>
+         
           <Divider />
-          <FormControl fullWidth sx={{ m: 1 }}>
+          
             <InputLabel id="LabelCategory">Category</InputLabel>
             <Select
               labelId="LabelCategory"
@@ -206,7 +204,7 @@ const EditItem = () => {
                 );
               })}
             </Select>
-          </FormControl>
+       
           <TextField
             autoFocus
             margin="normal"
