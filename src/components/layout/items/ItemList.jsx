@@ -34,7 +34,6 @@ function ItemList(props) {
       try { 
         let  url = API_URL.concat ("/lots/myitems","?&&page=",currentPage); 
         let resp = await doApiGet(url);
-        console.log(resp.data.data)
        setcountPages(Math.ceil((resp.data.count)/10))
       setItems(resp.data.data);
        setIsLoading(false);
