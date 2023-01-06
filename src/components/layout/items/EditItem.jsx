@@ -33,7 +33,7 @@ const EditItem = () => {
     itemStore.fetchItem(id);
     categoryStore.fetchCategories();
   }, []);
-  const all_categories = toJS(categoryStore.categories);
+  const  = toJS(categoryStore.categories);
   const [selectedFile, setSelectedFile] = useState();
   const [category, setCategory] = useState(item.category_url);
   const [hand, setHand] = useState(item.hand);
@@ -161,9 +161,9 @@ const EditItem = () => {
             required
             defaultValue={item.phone}
           />
-       
+          <FormControl fullWidth sx={{ m: 1 }}>
             <InputLabel id="LabelHand">Hand</InputLabel>
-            <Select
+            <Controller
               labelId="LabelHand"
               id="hand"
               required
@@ -173,20 +173,21 @@ const EditItem = () => {
               name="hand"
               onChange={handleChangeHand}
               defaultValue={item.hand}
-            >
-              <MenuItem value={0}>0</MenuItem>
-              <MenuItem value={1}>1</MenuItem>
-              <MenuItem value={2}>2</MenuItem>
-              <MenuItem value={3}>3</MenuItem>
-              <MenuItem value={4}>4</MenuItem>
-              <MenuItem value={5}>5</MenuItem>
-            </Select>
-         
+             render={({ field }) =>
+              <Select labelId="LabelHand" { ...field }
+            > <MenuItem value={0}>0</MenuItem>
+            <MenuItem value={1}>1</MenuItem>
+            <MenuItem value={2}>2</MenuItem>
+            <MenuItem value={3}>3</MenuItem>
+            <MenuItem value={4}>4</MenuItem>
+            <MenuItem value={5}>5</MenuItem>
+             </Select>}>
+              </Controller>
+          </FormControl>
           <Divider />
-          
+          <FormControl fullWidth sx={{ m: 1 }}>
             <InputLabel id="LabelCategory">Category</InputLabel>
-            <Select
-              labelId="LabelCategory"
+            <Controller
               id="category_url"
               required
               fullWidth
@@ -195,16 +196,18 @@ const EditItem = () => {
               label="Category"
               name="category_url"
               onChange={handleChangeCategory}
-            >
-              {all_categories.map((ITEM) => {
+             render={({ field }) =>
+              <Select labelId="LabelCategory" { ...field }
+             > {all_categories.map((ITEM) => {
                 return (
                   <MenuItem key={ITEM._id} value={ITEM.category_url}>
                     {ITEM.name}
                   </MenuItem>
                 );
-              })}
-            </Select>
-       
+              })}</Select>}>
+              </Controller>
+            
+          </FormControl>
           <TextField
             autoFocus
             margin="normal"
