@@ -92,6 +92,7 @@ const EditItem = () => {
       user_nickname: item.user_nickname,
       img_url: item.img_url,
     };
+    console.log(bodyData)
     await itemStore.updateItem(item._id, bodyData);
     if (selectedFile) {
       await upload(selectedFile, "items_preset", item._id);
@@ -191,7 +192,7 @@ const EditItem = () => {
               id="category_url"
               required
               fullWidth
-              value={category }
+              value={category}
               defaultValue={item.category_url}
               label="Category"
               name="category_url"
