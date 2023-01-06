@@ -33,7 +33,7 @@ const EditItem = () => {
     itemStore.fetchItem(id);
     categoryStore.fetchCategories();
   }, []);
-  const  = toJS(categoryStore.categories);
+  const all_categories = toJS(categoryStore.categories);
   const [selectedFile, setSelectedFile] = useState();
   const [category, setCategory] = useState(item.category_url);
   const [hand, setHand] = useState(item.hand);
@@ -169,6 +169,7 @@ const EditItem = () => {
               required
               fullWidth
               value={hand}
+              control={control}
               label="Hand"
               name="hand"
               onChange={handleChangeHand}
@@ -193,6 +194,7 @@ const EditItem = () => {
               fullWidth
               value={category}
               defaultValue={item.category_url}
+              control={control}
               label="Category"
               name="category_url"
               onChange={handleChangeCategory}
