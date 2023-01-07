@@ -9,6 +9,7 @@ import AlertDialog from "../AlertDialog/AlertDialog";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react";
 import { useEffect } from "react";
+import EditItem from "../layout/items/EditItem";
 const ITEM_HEIGHT = 48;
  function IconMenu(props) {
   useEffect(() => {
@@ -51,7 +52,9 @@ const ITEM_HEIGHT = 48;
           <MenuItem>
             <ListItemIcon>
               <IconButton
-                onClick={() =>navigate("/user/myitems/edit/" + props.editId)}
+                onClick={
+                //<EditItem id={props.editId}/>}
+                 () =>navigate("/user/myitems/edit/" + props.editId)}
               >
                 <Edit fontSize="small" />
               </IconButton>

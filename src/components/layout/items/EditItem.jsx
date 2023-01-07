@@ -18,40 +18,55 @@ import { Close, Send } from "@mui/icons-material";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { observer } from "mobx-react";
 import { upload } from "../../../services/CloudService/cloudServicetoNode";
-import itemStore from "../../../store/itemStore/itemStore";
 import { useParams } from "react-router";
-import categoryStore from "../../../store/categoryStore/categoryStore";
-import { toJS } from "mobx";
 import Loading from "../../Loading/Loading";
 import React from 'react';
+import { Controller, useForm } from "react-hook-form";
+import { doApiGet } from "../../../services/ApiService/ApiService";
+import { API_URL } from "../../../utils/constants/url.constants";
 const EditItem = () => {
+  const [start, setStart] = useState(true);
   const {id} = useParams();
-  const item = toJS(itemStore.item);
+   const [item,setItem]= useState({})
+   const [all_categories,setCategories]=useState([])
+  const getData = async () => {
+    console.log('getting data');
+    let url = API_URL + "/categories/";
+      let resp = await doApiGet(url);
+      setCategories(resp.data);
+      let url1 = API_URL + "/lots/byId/" + id;
+      let resp1 = await doApiGet(url1);
+      setItem(resp1.data);
+    setStart(false);
+};
   useEffect (() => {
-    itemStore.fetchItem(id);
-    categoryStore.fetchCategories();
-  }, []);
-  const all_categories = toJS(categoryStore.categories);
+    if (start === true) 
+      getData();
+    console.log('mounted');
+    return () => console.log('unmounting...');
+    
+  }, [start]);
+  
+  const defaultHand=item.hand;
+  const defaultCategory=item.category_url;
+
   const [selectedFile, setSelectedFile] = useState();
-  const [category, setCategory] = useState(item.category_url);
-  const [hand, setHand] = useState(item.hand);
+  const [category, setCategory] = useState(defaultCategory);
+  const [HAND, setHAND] = useState(defaultHand);
   const nameRef = useRef();
   const phoneRef = useRef();
   const infoRef = useRef();
   const locationRef = useRef();
   const start_priceRef = useRef();
   const navigate = useNavigate();
+  const { control } = useForm();
   const handleClose = () => {
-    
     setTimeout(() => {
-      itemStore.deleteItem();
-      navigate("/user/myitems");
     }, 2000);
   };
   const handleChangeHand = (event) => {
-    setHand(event.target.value);
+    setHAND(event.target.value);
   };
   const handleChangeCategory = (event) => {
     setCategory(event.target.value);
@@ -83,7 +98,7 @@ const EditItem = () => {
       info,
       location,
       start_price,
-      hand,
+      hand:HAND,
       category_url: category,
       item_lot,
       days,
@@ -91,12 +106,12 @@ const EditItem = () => {
       img_url: item.img_url,
     };
     console.log(bodyData)
-    await itemStore.updateItem(item._id, bodyData);
+    //await itemStore.updateItem(item._id, bodyData);
     if (selectedFile) {
       await upload(selectedFile, "items_preset", item._id);
     }
     setTimeout(() => {
-      itemStore.deleteItem();
+      
       navigate("/user/myitems");
     }, 2000);
     
@@ -168,7 +183,7 @@ const EditItem = () => {
               id="hand"
               required
               fullWidth
-              value={hand}
+              value={HAND}
               control={control}
               label="Hand"
               name="hand"
@@ -261,4 +276,4 @@ const EditItem = () => {
   );
 };
 
-export default observer(EditItem);
+export default (EditItem);
