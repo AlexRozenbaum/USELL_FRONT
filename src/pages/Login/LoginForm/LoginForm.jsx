@@ -50,7 +50,7 @@ function LoginForm() {
     try {
       const { data } = await doApiMethod(url, "POST", bodyData);
       // לשמור את הטוקן
-      userStore.user = data.userclone._doc;
+      userStore.setUser (data.userclone._doc);
       localStorage.setItem(TOKEN_KEY, data.token);
       const user = toJS(userStore.user);
        console.log(user.activateLink==='')

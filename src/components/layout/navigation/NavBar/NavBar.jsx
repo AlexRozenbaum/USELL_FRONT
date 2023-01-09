@@ -9,24 +9,16 @@ import {
 import { Lock,  PersonAddAlt1 } from '@mui/icons-material';
 import UserIcons from '../../../user/UserIcons';
 import { useNavigate } from 'react-router-dom';
-import { toJS } from 'mobx';
-import authStore from '../../../../store/authStore/authStore';
 import { observer } from 'mobx-react';
 import myLogo from "../../../../assets/photos/Usell.png"
 const NavBar = () => {
   const navigate = useNavigate();
-  const authAdmin=(toJS(authStore.authAdmin)=== "true");
-   const authUser= (toJS(authStore.authUser)=== "true");
-   const auth= authAdmin || authUser ;
   useEffect(() => {
-    authStore.checkUser();
   },[]);
-
   return (
     <>
       <AppBar>
-        <Container maxWidth="lg"> 
-            
+        <Container maxWidth="lg">   
           <Toolbar disableGutters>
           <img alt='logo'
                 src={myLogo}
@@ -51,7 +43,7 @@ const NavBar = () => {
             >
               YRWtUsell
             </Typography>
-            {auth?
+            {true?
               <UserIcons />
             : <>
               <Button
@@ -70,7 +62,6 @@ const NavBar = () => {
               </Button>
               </>
             }
-           
           </Toolbar>
         </Container>
       </AppBar>

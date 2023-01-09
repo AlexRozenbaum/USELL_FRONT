@@ -2,24 +2,14 @@ import { Dashboard, Logout, Password, Settings, Work } from '@mui/icons-material
 import { ListItemIcon, Menu, MenuItem } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import userStore from '../../store/userStore/userStore';
 import { observer } from 'mobx-react';
-import authStore from '../../store/authStore/authStore';
-import { toJS } from 'mobx';
-import alertStore from '../../store/alertStore/alertStore';
 const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
   const handleCloseUserMenu = () => {
     setAnchorUserMenu(null);
   };
   useEffect(() => {
-    authStore.checkUser();
    },[]);
-
-   const authAdmin=(toJS(authStore.authAdmin)=== "true");
-   const authUser= (toJS(authStore.authUser)=== "true");
-   const auth= authAdmin || authUser ;
 const navigate = useNavigate();
-
   return (
     <>
       <Menu
@@ -28,7 +18,7 @@ const navigate = useNavigate();
         onClose={handleCloseUserMenu}
         onClick={handleCloseUserMenu}
       >
-        {auth && (
+        {true&& (
           <MenuItem
              onClick={() =>
                 navigate ('/user/profile')
@@ -41,7 +31,7 @@ const navigate = useNavigate();
           </MenuItem>  
         )}
         {
-          auth && (
+          true && (
             <MenuItem
             onClick={() =>
                navigate ('/user/changepassword')
@@ -54,7 +44,7 @@ const navigate = useNavigate();
          </MenuItem>
           )
         }
-        {authAdmin &&( <MenuItem onClick={() =>
+        {true &&( <MenuItem onClick={() =>
                 navigate ('/admin/dashboard')
              }>
           <ListItemIcon>
@@ -62,7 +52,7 @@ const navigate = useNavigate();
           </ListItemIcon>
           Dashboard
         </MenuItem> )}
-        {authUser &&( <MenuItem onClick={() =>
+        {true &&( <MenuItem onClick={() =>
                 navigate ('/user/myitems')
              }>
           <ListItemIcon>
@@ -71,8 +61,8 @@ const navigate = useNavigate();
           My items
         </MenuItem> )}
         
-        {auth &&( <MenuItem
-           onClick={() => {alertStore.set('','',false);userStore.deleteUser();authStore.deleteAuth();navigate('/');}
+        {true &&( <MenuItem
+           onClick={() => {navigate('/');}
            }
         >
           <ListItemIcon>

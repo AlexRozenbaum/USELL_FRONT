@@ -13,6 +13,8 @@ class Item {
     try {
       let resp = await doApiGet(url);
       this.item = resp.data;
+      console.log(resp.data)
+      
     } catch (err) {
       console.log(err);
       alert("there problem ,try again later");

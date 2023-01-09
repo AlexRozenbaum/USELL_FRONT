@@ -13,41 +13,31 @@ import {
   Tooltip,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import userStore from "../../store/userStore/userStore";
 import UserMenu from "./UserMenu";
 import { observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import { toJS } from "mobx";
-import authStore from "../../store/authStore/authStore";
+
 const UserIcons = () => {
   useEffect(() => {
-    authStore.checkUser();
-  }, [user]);
-  const authAdmin = toJS(authStore.authAdmin) === "true";
-  const authUser = toJS(authStore.authUser) === "true";
-  const auth=authUser||authAdmin;
-
-  const user = toJS(userStore.user);
- 
-  
+  }, []);
 
   const [anchorUserMenu, setAnchorUserMenu] = useState(null);
   const navigate = useNavigate();
   return (
-    <>{auth&&
+    <>{true&&
     <Box>
-      {authUser ? (
+      {true? (
         <>
           <Tooltip title="Check your lotlist and bids">
             <IconButton size="large" color="inherit">
-              <Badge badgeContent={auth? user.lotlist.length : ""}>
+              <Badge badgeContent={12}>
                 <ShoppingBag onClick={() => navigate("/user/mylotlist")} />
               </Badge>
             </IconButton>
           </Tooltip>
           <Tooltip title="Check your wishlist">
             <IconButton size="large" color="inherit">
-              <Badge badgeContent={auth? user.wishlist.length : ""}>
+              <Badge badgeContent={10}>
                 <ShoppingCart onClick={() => navigate("/user/mywishlist")} />
               </Badge>
             </IconButton>
@@ -62,7 +52,7 @@ const UserIcons = () => {
         </>
       ) : (
         <>
-          {authAdmin && (
+          {true && (
             <Tooltip title="Admin Dashboard">
               <ListItemIcon>
                 <Dashboard
@@ -76,8 +66,8 @@ const UserIcons = () => {
       )}
       <Tooltip title="Open User Settings">
         <IconButton onClick={(e) => setAnchorUserMenu(e.currentTarget)}>
-          <Avatar src={auth?user.img_url:""} alt={auth?user.name:""}>
-            {auth?user.name.charAt(0).toUpperCase():""}
+          <Avatar src={""} alt={10}>
+            {10}
           </Avatar>
         </IconButton>
       </Tooltip>

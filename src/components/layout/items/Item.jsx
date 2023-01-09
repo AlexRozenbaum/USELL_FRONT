@@ -46,7 +46,7 @@ const ExpandMore = styled((props) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const user=toJS(userStore.user);
+  let user=toJS(userStore.user);
 
   useEffect(() => {
   }, [user,state]);
@@ -58,6 +58,8 @@ const ExpandMore = styled((props) => {
    ( e.target.value<MIN_BID)
     e.target.value=MIN_BID
 };
+if(user)
+{console.log("word")}
   let defaultwinner='';
  if((item.winner_price===null)&&(user._id===item.user_id))
   {defaultwinner='NO ONE YET';}
@@ -129,9 +131,9 @@ return(
         }
         action={props.authUser&&
           <>
-            {(item.item_lot===false ||item.item_lot===null) && item.user_id===user._id&&<IconMenu editId={item._id} delete={DeleteItem} question={"Delete item?"}/>}
-            {((item.item_lot===true&&(item.winner_user_id!==user._id))||(item.item_lot===false))&&(userStore.user.wishlist.includes(item._id))&& <IconMenu delete={DeleteItemFromWishlist} question={"Delete item from wishlist?"}/> }
-          </>
+            {(item.item_lot===false ||item.item_lot===null) && item.user_id=== (user?user._id:false)&&<IconMenu editId={item._id} delete={DeleteItem} question={"Delete item?"}/>}
+            {((item.item_lot===true&&(item.winner_user_id!==user._id))||(item.item_lot===false))&&(user?(userStore.user.wishlist.includes(item._id)):false)&& <IconMenu delete={DeleteItemFromWishlist} question={"Delete item from wishlist?"}/> }
+        </>
         }
         title={item.name}
         subheader={"published " + DateService(item.date_created)+`${user._id===item.user_id?" MY ITEM": ""}`} 

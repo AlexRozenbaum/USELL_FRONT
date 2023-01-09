@@ -24,7 +24,13 @@ import React from 'react';
 
 
   const Profile = () => {
-    useEffect(()=>{},[])
+    const [start, setStart] = useState(true);
+    useEffect(()=>{
+      if (start === true) 
+     
+    console.log('mounted');
+    return () => console.log('unmounting...');
+    },[start])
     const [selectedFile, setSelectedFile] = useState();
     const state=(toJS(alertStore.state))
     const user=userStore.user;

@@ -14,7 +14,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { Close, Send } from "@mui/icons-material";
+import { Category, Close, Send } from "@mui/icons-material";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -22,55 +22,56 @@ import { upload } from "../../../services/CloudService/cloudServicetoNode";
 import { useParams } from "react-router";
 import Loading from "../../Loading/Loading";
 import React from 'react';
-import { Controller, useForm } from "react-hook-form";
+import {  Controller, useForm } from "react-hook-form";
 import { doApiGet } from "../../../services/ApiService/ApiService";
 import { API_URL } from "../../../utils/constants/url.constants";
+import itemStore from "../../../store/itemStore/itemStore";
+import { observer } from "mobx-react";
+import categoryStore from "../../../store/categoryStore/categoryStore";
+import { toJS } from "mobx";
+let item={}
+let all_categories=[]
 const EditItem = () => {
   const [start, setStart] = useState(true);
   const {id} = useParams();
-   const [item,setItem]= useState({})
-   const [all_categories,setCategories]=useState([])
+
   const getData = async () => {
     console.log('getting data');
-    let url = API_URL + "/categories/";
-      let resp = await doApiGet(url);
-      setCategories(resp.data);
-      let url1 = API_URL + "/lots/byId/" + id;
-      let resp1 = await doApiGet(url1);
-      setItem(resp1.data);
+     await (itemStore.fetchItem(id));
+     await categoryStore.fetchCategories();
+     item=itemStore.item;
+      all_categories=toJS(categoryStore.categories);
+      console.log(all_categories)
     setStart(false);
 };
   useEffect (() => {
     if (start === true) 
-      getData();
+    getData();
     console.log('mounted');
     return () => console.log('unmounting...');
     
-  }, [start]);
+  }, []);
   
-  const defaultHand=item.hand;
-  const defaultCategory=item.category_url;
+
+
 
   const [selectedFile, setSelectedFile] = useState();
-  const [category, setCategory] = useState(defaultCategory);
-  const [HAND, setHAND] = useState(defaultHand);
+  const [category, setCategory] = useState(item.category_url);
+  const [HAND, setHAND] = useState(item.hand);
   const nameRef = useRef();
   const phoneRef = useRef();
   const infoRef = useRef();
   const locationRef = useRef();
   const start_priceRef = useRef();
+  const handRef = useRef();
+  const categoryRef = useRef();
   const navigate = useNavigate();
   const { control } = useForm();
   const handleClose = () => {
     setTimeout(() => {
     }, 2000);
   };
-  const handleChangeHand = (event) => {
-    setHAND(event.target.value);
-  };
-  const handleChangeCategory = (event) => {
-    setCategory(event.target.value);
-  };
+
   const handleChange = (e) => {
     const file = e.target.files[0];
     let reader = new FileReader();
@@ -90,6 +91,8 @@ const EditItem = () => {
     const info = infoRef.current.value;
     const location = locationRef.current.value;
     const start_price = start_priceRef.current.value;
+    const hand = handRef.current.value;
+    const category_url = categoryRef.current.value;
     const item_lot = null;
     const days = null;
     const bodyData = {
@@ -98,26 +101,25 @@ const EditItem = () => {
       info,
       location,
       start_price,
-      hand:HAND,
-      category_url: category,
+      hand,
+      category_url,
       item_lot,
       days,
       user_nickname: item.user_nickname,
       img_url: item.img_url,
     };
     console.log(bodyData)
-    //await itemStore.updateItem(item._id, bodyData);
+    await itemStore.updateItem(item._id, bodyData);
     if (selectedFile) {
       await upload(selectedFile, "items_preset", item._id);
     }
     setTimeout(() => {
-      
       navigate("/user/myitems");
     }, 2000);
     
   };
   return (
-   <> {(Object.keys(item).length === 0)?<Loading/>:
+   <React.StrictMode> {(Object.keys(item).length === 0)?<Loading/>:
     <Dialog open={true} onClose={handleClose}>
       <DialogTitle>
         Item Details
@@ -176,55 +178,51 @@ const EditItem = () => {
             required
             defaultValue={item.phone}
           />
-          <FormControl fullWidth sx={{ m: 1 }}>
+       
+       
             <InputLabel id="LabelHand">Hand</InputLabel>
-            <Controller
+            <Select
               labelId="LabelHand"
               id="hand"
               required
               fullWidth
               value={HAND}
-              control={control}
+             
               label="Hand"
               name="hand"
-              onChange={handleChangeHand}
               defaultValue={item.hand}
-             render={({ field }) =>
-              <Select labelId="LabelHand" { ...field }
+              inputRef={handRef}
             > <MenuItem value={0}>0</MenuItem>
             <MenuItem value={1}>1</MenuItem>
             <MenuItem value={2}>2</MenuItem>
             <MenuItem value={3}>3</MenuItem>
             <MenuItem value={4}>4</MenuItem>
             <MenuItem value={5}>5</MenuItem>
-             </Select>}>
-              </Controller>
-          </FormControl>
+             </Select>
+             
+        
           <Divider />
-          <FormControl fullWidth sx={{ m: 1 }}>
+       
             <InputLabel id="LabelCategory">Category</InputLabel>
-            <Controller
+            <Select
               id="category_url"
               required
               fullWidth
               value={category}
               defaultValue={item.category_url}
-              control={control}
+              inputRef={categoryRef}
               label="Category"
               name="category_url"
-              onChange={handleChangeCategory}
-             render={({ field }) =>
-              <Select labelId="LabelCategory" { ...field }
              > {all_categories.map((ITEM) => {
                 return (
                   <MenuItem key={ITEM._id} value={ITEM.category_url}>
                     {ITEM.name}
                   </MenuItem>
                 );
-              })}</Select>}>
-              </Controller>
-            
-          </FormControl>
+              })}</Select>
+          
+          
+       
           <TextField
             autoFocus
             margin="normal"
@@ -272,8 +270,8 @@ const EditItem = () => {
           </Button>
         </DialogActions>
       </form>
-    </Dialog>}</>
+    </Dialog>}</React.StrictMode>
   );
 };
 
-export default (EditItem);
+export default observer(EditItem);

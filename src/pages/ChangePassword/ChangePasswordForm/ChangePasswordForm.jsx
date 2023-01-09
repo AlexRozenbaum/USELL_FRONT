@@ -13,9 +13,9 @@ import { useRef} from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react';
-import userStore from '../../store/userStore/userStore';
 import React from 'react';
-  const ChangePassword = () => {
+import userStore from '../../../store/userStore/userStore';
+  const ChangePasswordForm = () => {
     useEffect(()=>{},[])
     const user=userStore.user;
     const currentPassRef = useRef();
@@ -117,4 +117,4 @@ import React from 'react';
     );
   };
 
-  export default observer(ChangePassword)
+  export default observer(ChangePasswordForm)

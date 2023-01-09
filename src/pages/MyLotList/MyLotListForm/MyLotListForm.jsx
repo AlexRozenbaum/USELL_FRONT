@@ -1,15 +1,16 @@
 import { FormControl } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import SearchBar from "../../../components/SearchSortPage/SearchBar/SearchBar";
 import { observer } from "mobx-react";
+import React, { useEffect, useState } from "react";
 import ItemsList from "../../../components/Items/ItemsList";
-import { API_URL } from "../../../utils/constants/url.constants";
-import { doApiGet } from "../../../services/ApiService/ApiService";
 import Loading from "../../../components/Loading/Loading";
-import PerPage from "../../../components/SearchSortPage/PerPage/PerPage";
 import ByCategory from "../../../components/SearchSortPage/ByCategory/ByCategory";
+import PerPage from "../../../components/SearchSortPage/PerPage/PerPage";
+import SearchBar from "../../../components/SearchSortPage/SearchBar/SearchBar";
+import { doApiGet } from "../../../services/ApiService/ApiService";
+import { API_URL } from "../../../utils/constants/url.constants";
 
-function HomeForm() {
+
+function MyLotListForm() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [countPages,setcountPages] = useState(1);
@@ -26,7 +27,7 @@ function HomeForm() {
     console.log("getting data");
     try {
       let url = API_URL.concat(
-        "/lots/",
+        "/lots/lotlist",
         "?&&s=",
         searchQuery,
         "&&category=",
@@ -61,4 +62,5 @@ function HomeForm() {
             </>}</></div>
   );
 }
-export default observer(HomeForm);
+export default observer(MyLotListForm);
+

@@ -22,13 +22,27 @@ function ItemList(props) {
   const searchQuery=props.searchQuery;
   const [countPages,setcountPages] = useState(1);
   const [currentPage,setcurrentPage] = useState(1);
+  const [start, setStart] = useState(true);
+  const getData = async () => {
+    console.log('getting data');
+     userStore.fetchUser();
+     
+    setStart(false);
+};
+
   useEffect(() => {
-    setRender(false)
+    
+    if (start === true) 
+    getData();
+    setRender(false) 
     doApi();
+    return () => console.log('unmounting...');
   }, [history.pathname,searchQuery,category,render,currentPage,props]);
-  const wishlist = toJS(userStore.user.wishlist);
-  const lotlist = toJS(userStore.user.lotlist);
+  const user=(toJS(userStore.user))
+
   const doApi = async () => {
+    const wishlist = user.wishlist
+    const lotlist = user.lotlist
     setIsLoading(true);
     if (props.authUser&&props.myitems) {
       try { 
@@ -115,7 +129,7 @@ function ItemList(props) {
           })}
         </Grid>
         <Stack  alignItems={'center'} spacing={2}>
-      <Pagination  count={countPages} page={currentPage}  onChange={(event, value) => setcurrentPage(value)}variant="outlined" shape="rounded" />
+      <Pagination  count={countPages} page={currentPage}  onChange={(value) => setcurrentPage(value)}variant="outlined" shape="rounded" />
     </Stack></>
       )}
     </div>

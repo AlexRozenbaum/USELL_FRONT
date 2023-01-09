@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { action, makeAutoObservable } from "mobx";
 import { doApiGet, doApiMethod } from "../../services/ApiService/ApiService";
 import {
   API_URL
@@ -11,21 +11,41 @@ class User {
   constructor() {
     makeAutoObservable(this);
   }
-  refreshUser = async () => {
-    let url = API_URL + "/users/myInfo";
-    try {
-      let resp = await doApiGet(url);
-      if (resp.data) {
-        this.user = resp.data;
-      } else {
-        alertStore.set('Message','There is problem , try again later', true);
-
+   setUser=async(data)=>
+  {
+    this.user=data;
+  }
+  fetchUser() {
+    const refreshUser = async () => {
+      let url = API_URL + "/users/myInfo";
+      try {
+        let resp = await doApiGet(url);
+       // if (resp.data) {
+       //   console.log(resp.data)
+       //   this.user = resp.data;
+       // } 
+       // else {
+        //  alertStore.set('Message','There is problem , try again later', true);
+  
+       // }
+       return resp.data;
+      } catch (err) {
+        console.log(err);
+        alertStore.set('Message','There problem , try again later', true);
       }
-    } catch (err) {
-      console.log(err);
-      alertStore.set('Message','There problem , try again later', true);
-    }
-  };
+    };
+    this.user = {}
+    refreshUser().then(
+        action("fetchSuccess", data => {
+         
+            this.user = data ;
+            console.log(data)
+    
+        })
+       
+        
+    )
+}
   changePassword = async (bodyData) =>{
     let url = API_URL + "/users/changepassword";
     try {

@@ -24,7 +24,6 @@ import alertStore from "../../../store/alertStore/alertStore";
 import { toJS } from "mobx";
 
 const theme = createTheme();
-
 function ForgetPasswordForm() {
   const state=(toJS(alertStore.state))
   useEffect(() => {
