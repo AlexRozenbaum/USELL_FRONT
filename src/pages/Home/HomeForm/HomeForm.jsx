@@ -8,20 +8,26 @@ import { doApiGet } from "../../../services/ApiService/ApiService";
 import Loading from "../../../components/Loading/Loading";
 import PerPage from "../../../components/SearchSortPage/PerPage/PerPage";
 import ByCategory from "../../../components/SearchSortPage/ByCategory/ByCategory";
+import SortBy from "../../../components/SearchSortPage/SortBy/SortBy";
+import authStore from "../../../store/authStore/authStore";
 
 function HomeForm() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [countPages,setcountPages] = useState(1);
-  const [currentPage,setcurrentPage] = useState(1);
+  const [countPages, setcountPages] = useState(1);
+  const [currentPage, setcurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [perPage, setPerPage] = useState(10);
   const [category, setCategory] = useState("ALL");
+  const [sortBy, setSortBy] = useState("");
+
   useEffect(() => {
-      doApi();
-      console.log("mounted Home");
+    authStore.checkUser();
+    doApi();
+    console.log("mounted Home");
     return () => console.log("unmounting..Home");
-  }, [currentPage,category,searchQuery,perPage]);
+  }, [currentPage, category, searchQuery, perPage, sortBy]);
+    const authUser=authStore.authUser;
   const doApi = async () => {
     console.log("getting data");
     try {
@@ -34,11 +40,13 @@ function HomeForm() {
         "&&page=",
         currentPage,
         "&&perPage=",
-        perPage,  
+        perPage,
+        "&&sort=",
+        sortBy
       );
-      console.log(url)
+      console.log(url);
       let resp = await doApiGet(url);
-      const totalPages = Math.ceil(resp.data.count/perPage);
+      const totalPages = Math.ceil(resp.data.count / perPage);
       setcountPages(totalPages);
       setItems(resp.data.items);
       setIsLoading(false);
@@ -48,17 +56,32 @@ function HomeForm() {
     }
   };
   return (
-    <div><>
-    {isLoading?<Loading/>:<>
-                <SearchBar setSearchQuery={setSearchQuery} />
-                 <FormControl>
-                  <ByCategory category={category} setCategory={setCategory}/>
-                  </FormControl>
-                  <FormControl>
-                  <PerPage perPage={perPage} setPerPage={setPerPage}/>
-              </FormControl>
-            <ItemsList  items={items} countPages={countPages} currentPage={currentPage} setcurrentPage={setcurrentPage}/>
-            </>}</></div>
+    <div>
+      <>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <SearchBar setSearchQuery={setSearchQuery} />
+            <FormControl>
+              <ByCategory category={category} setCategory={setCategory} />
+            </FormControl>
+            <FormControl>
+              <PerPage perPage={perPage} setPerPage={setPerPage} />
+            </FormControl>
+            <FormControl>
+              <SortBy sortBy={sortBy} setSortBy={setSortBy} />
+            </FormControl>
+            <ItemsList
+              items={items}
+              countPages={countPages}
+              currentPage={currentPage}
+              setcurrentPage={setcurrentPage}
+            />
+          </>
+        )}
+      </>
+    </div>
   );
 }
 export default observer(HomeForm);

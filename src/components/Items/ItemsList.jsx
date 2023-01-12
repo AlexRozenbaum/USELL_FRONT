@@ -4,7 +4,8 @@ import Item from "./Item";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-function ItemsList({items, countPages,currentPage,setcurrentPage,actions}) {
+function ItemsList({items, countPages,currentPage,setcurrentPage}) {
+  
   const handleChange = (event, value) => {
     setcurrentPage(value);
   };
@@ -15,7 +16,7 @@ function ItemsList({items, countPages,currentPage,setcurrentPage,actions}) {
           {items.map((item, i) => {
             return (
               <Grid item xs={6} md={4} key={item._id}>
-                <Item index={i} item={item} actions={actions}/>
+                <Item index={i} item={item} />
               </Grid>
             );
           })}

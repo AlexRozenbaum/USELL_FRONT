@@ -3,12 +3,19 @@ import { ListItemIcon, Menu, MenuItem } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react';
+import authStore from '../../store/authStore/authStore';
 const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
   const handleCloseUserMenu = () => {
     setAnchorUserMenu(null);
   };
+  const authAdmin=authStore.authAdmin;
+const authUser=authStore.authUser;
+const auth=authStore.authUser;
   useEffect(() => {
-   },[]);
+    authStore.checkUser();
+  }, [auth]);
+  
+
 const navigate = useNavigate();
   return (
     <>
@@ -18,7 +25,7 @@ const navigate = useNavigate();
         onClose={handleCloseUserMenu}
         onClick={handleCloseUserMenu}
       >
-        {true&& (
+        {auth&& (
           <MenuItem
              onClick={() =>
                 navigate ('/user/profile')
@@ -31,7 +38,7 @@ const navigate = useNavigate();
           </MenuItem>  
         )}
         {
-          true && (
+          auth && (
             <MenuItem
             onClick={() =>
                navigate ('/user/changepassword')
@@ -44,7 +51,7 @@ const navigate = useNavigate();
          </MenuItem>
           )
         }
-        {true &&( <MenuItem onClick={() =>
+        {authAdmin &&( <MenuItem onClick={() =>
                 navigate ('/admin/dashboard')
              }>
           <ListItemIcon>
@@ -52,7 +59,7 @@ const navigate = useNavigate();
           </ListItemIcon>
           Dashboard
         </MenuItem> )}
-        {true &&( <MenuItem onClick={() =>
+        {authUser &&( <MenuItem onClick={() =>
                 navigate ('/user/myitems')
              }>
           <ListItemIcon>
@@ -61,8 +68,8 @@ const navigate = useNavigate();
           My items
         </MenuItem> )}
         
-        {true &&( <MenuItem
-           onClick={() => {navigate('/');}
+        {auth &&( <MenuItem
+           onClick={() => {navigate('/');authStore.deleteAuth();}
            }
         >
           <ListItemIcon>

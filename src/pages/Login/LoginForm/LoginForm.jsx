@@ -15,25 +15,20 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { doApiMethod } from "../../../services/ApiService/ApiService";
 import {
   API_URL,
-  LOGGINED_ADMIN,
-  LOGGINED_USER,
   TOKEN_KEY,
+  USER_KEY,
 } from "../../../utils/constants/url.constants";
-import userStore from "../../../store/userStore/userStore";
 import { observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import MyAlert from "../../../MyAlert/MyAlert";
 import { useEffect } from "react";
 import alertStore from "../../../store/alertStore/alertStore";
-import { toJS } from "mobx";
+import { useLocalStorage } from "../../../Hooks/useLocalStorage";
 
 const theme = createTheme();
-
 function LoginForm() {
-  const state=(toJS(alertStore.state))
-  useEffect(() => {
-  }, []);
-
+  const [user,setUser]=useLocalStorage(USER_KEY,null)
+  
+  useEffect(() => {}, []);
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -46,51 +41,42 @@ function LoginForm() {
   };
   const doApiForm = async (bodyData) => {
     const url = API_URL + "/users/login";
-
     try {
       const { data } = await doApiMethod(url, "POST", bodyData);
-      // לשמור את הטוקן
-      userStore.setUser (data.userclone._doc);
       localStorage.setItem(TOKEN_KEY, data.token);
-      const user = toJS(userStore.user);
-       console.log(user.activateLink==='')
-      if (user.active===false&&user.activateLink!=='') 
-      {
-        alertStore.set('NOT ACTIVATED','Activate your link in mail and sign in after this ', true);
+      setUser(data.userclone._doc);
+      if (user.active === false && user.activateLink !== "") {
+        alertStore.set(
+          "NOT ACTIVATED",
+          "Activate your link in mail and sign in after this ",
+          true
+        );
       }
-      if (user.active===false&&user.activateLink==='') 
-      {
-        alertStore.set('BANNED','You banned ,contact administrators', true);
+      if (user.active === false && user.activateLink === "") {
+        alertStore.set("BANNED", "You banned ,contact administrators", true);
       }
-      if (user.role === "user" && user.active) 
-        {
-          localStorage.setItem(LOGGINED_USER, true);
-          alertStore.set("Welcome", `${user.name} Welcome to U SELL!`, true);
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
-        }
-        if (user.role === "admin" && user.active) {
-          localStorage.setItem(LOGGINED_ADMIN, true);
-          alertStore.set("Welcome", `${user.name} Welcome to U SELL!`, true);
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
-         
-        }
-      
+      if (user.role === "user" && user.active) {
+        alertStore.set("Welcome", `${user.name} Welcome to U SELL!`, true);
+          navigate("/");
+  
+      }
+      if (user.role === "admin" && user.active) {
+        alertStore.set("Welcome", `${user.name} Welcome to U SELL!`, true);
+          navigate("/");
+      }
     } catch (err) {
-      if(err)
-      alertStore.set("Error", `User or password wrong, or service down!`, true);
+      if (err)
+        alertStore.set(
+          "Error",
+          `User or password wrong, or service down!`,
+          true
+        );
     }
   };
-
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        {state&&<MyAlert/>}
         <CssBaseline />
-        
         <Box
           sx={{
             marginTop: 8,

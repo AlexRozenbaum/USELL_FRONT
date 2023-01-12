@@ -11,10 +11,13 @@ import UserIcons from '../../../user/UserIcons';
 import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import myLogo from "../../../../assets/photos/Usell.png"
+import authStore from '../../../../store/authStore/authStore';
 const NavBar = () => {
   const navigate = useNavigate();
   useEffect(() => {
-  },[]);
+    authStore.checkUser();
+  }, []);
+const auth=authStore.auth;
   return (
     <>
       <AppBar>
@@ -43,7 +46,7 @@ const NavBar = () => {
             >
               YRWtUsell
             </Typography>
-            {true?
+            {auth?
               <UserIcons />
             : <>
               <Button

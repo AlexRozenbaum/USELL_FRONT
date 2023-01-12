@@ -1,26 +1,37 @@
 import { makeAutoObservable } from "mobx";
-import {LOGGINED_ADMIN, LOGGINED_USER, TOKEN_KEY } from "../../utils/constants/url.constants";
-class Auth{
-   authAdmin=false;
-   authUser=false;
+import { TOKEN_KEY, USER_KEY } from "../../utils/constants/url.constants";
+
+class Auth {
+  authAdmin = false;
+  authUser = false;
+  auth = false;
   constructor() {
     makeAutoObservable(this);
   }
-    checkUser=()=> {
-    if(localStorage.getItem(TOKEN_KEY)){
-    this.authAdmin=localStorage.getItem(LOGGINED_ADMIN);
+  checkUser = () => {
+    const user = JSON.parse(localStorage.getItem(USER_KEY));
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (token) {
+      if (user)
+        if (user.active === true && user.role === "user") {
+          this.authUser = true;
+        }  
     }
-    if(localStorage.getItem(TOKEN_KEY)){
-      this.authUser=localStorage.getItem(LOGGINED_USER);
+    if (token) {
+      if (user)
+        if (user.active === true && user.role === "admin") {
+          this.authAdmin = true;
+        }
     }
-    }
-    deleteAuth=()=>{
-    this.authAdmin=false;
-    this.authUser=false;
-    localStorage.setItem(TOKEN_KEY,null)
-    localStorage.setItem(LOGGINED_ADMIN,false)
-    localStorage.setItem(LOGGINED_USER,false)
-   }
+    this.auth = this.authAdmin || this.authUser;
+  };
+  deleteAuth = () => {
+    this.authAdmin = false;
+    this.authUser = false;
+    this.auth = false;
+    localStorage.setItem(TOKEN_KEY, null);
+    localStorage.setItem(USER_KEY, null);
+  };
 }
 const authStore = new Auth();
 export default authStore;

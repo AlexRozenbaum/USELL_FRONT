@@ -7,7 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton } from '@mui/material';
 
-export default function AlertDialog() {
+export default function AlertDialog({question,icon,answer}) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -22,7 +22,7 @@ export default function AlertDialog() {
     <div>
       
       <IconButton variant="outlined" onClick={handleClickOpen}>
-       Icon
+       {icon}
       </IconButton> 
       <Dialog
         open={open}
@@ -31,7 +31,7 @@ export default function AlertDialog() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-      Question
+        {question}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -39,7 +39,7 @@ export default function AlertDialog() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>No</Button>
-          <Button onClick={() => {handleClose()}} autoFocus>
+          <Button onClick={() => {answer(true);handleClose()}} autoFocus>
             Yes
           </Button>
         </DialogActions>

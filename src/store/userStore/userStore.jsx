@@ -46,20 +46,7 @@ class User {
         
     )
 }
-  changePassword = async (bodyData) =>{
-    let url = API_URL + "/users/changepassword";
-    try {
-      let resp = await doApiMethod(url, "PATCH",bodyData);
-      if (resp.data) {
-        alertStore.set('Message','Password changed succesfully', true);
-      } else {
-        alertStore.set('Message','There problem , try again later', true);
-      }
-    } catch (err) {
-      console.log(err);
-      alertStore.set('Message','There problem , try again later', true);
-    }
-  }
+ 
   updateUser = async () => {
     let url = API_URL + "/users/myinfo/edit";
     try {
