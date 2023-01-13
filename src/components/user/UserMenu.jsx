@@ -4,10 +4,12 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import authStore from '../../store/authStore/authStore';
+import userStore from '../../store/userStore/userStore';
 const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
   const handleCloseUserMenu = () => {
     setAnchorUserMenu(null);
   };
+  const user=userStore.user;
   const authAdmin=authStore.authAdmin;
 const authUser=authStore.authUser;
 const auth=authStore.authUser;

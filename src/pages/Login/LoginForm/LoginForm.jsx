@@ -15,18 +15,17 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { doApiMethod } from "../../../services/ApiService/ApiService";
 import {
   API_URL,
-  TOKEN_KEY,
-  USER_KEY,
+  TOKEN_KEY
 } from "../../../utils/constants/url.constants";
 import { observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import alertStore from "../../../store/alertStore/alertStore";
-import { useLocalStorage } from "../../../Hooks/useLocalStorage";
-
+import userStore from "../../../store/userStore/userStore";
+import { toJS } from "mobx";
 const theme = createTheme();
 function LoginForm() {
-  const [user,setUser]=useLocalStorage(USER_KEY,null)
+  
   
   useEffect(() => {}, []);
   const navigate = useNavigate();
@@ -44,7 +43,8 @@ function LoginForm() {
     try {
       const { data } = await doApiMethod(url, "POST", bodyData);
       localStorage.setItem(TOKEN_KEY, data.token);
-      setUser(data.userclone._doc);
+       userStore.user=data.userclone._doc;
+       const user=userStore.user;
       if (user.active === false && user.activateLink !== "") {
         alertStore.set(
           "NOT ACTIVATED",

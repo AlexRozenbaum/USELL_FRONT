@@ -13,11 +13,14 @@ import { observer } from 'mobx-react';
 import myLogo from "../../../../assets/photos/Usell.png"
 import authStore from '../../../../store/authStore/authStore';
 const NavBar = () => {
+  const auth=authStore.auth;
+  console.log(auth)
   const navigate = useNavigate();
   useEffect(() => {
     authStore.checkUser();
   }, []);
-const auth=authStore.auth;
+
+
   return (
     <>
       <AppBar>

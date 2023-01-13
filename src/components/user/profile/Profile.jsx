@@ -16,10 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react";
 import { upload } from "../../../services/CloudService/cloudServicetoNode";
 import DateService from "../../../services/DateService/DateService";
-import alertStore from "../../../store/alertStore/alertStore";
 import React from "react";
-import { API_URL } from "../../../utils/constants/url.constants";
-import { doApiMethod } from "../../../services/ApiService/ApiService";
 import { USER_KEY } from "../../../utils/constants/url.constants";
 const user = JSON.parse(localStorage.getItem(USER_KEY));
 const Profile = () => {

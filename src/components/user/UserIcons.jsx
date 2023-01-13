@@ -17,40 +17,22 @@ import UserMenu from "./UserMenu";
 import { observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import authStore from "../../store/authStore/authStore";
-import { USER_KEY } from "../../utils/constants/url.constants";
-import { useLocalStorage } from "../../Hooks/useLocalStorage";
-import { refreshUser } from "./refreshUser/refreshUser";
+import userStore from "../../store/userStore/userStore";
 
 
 const UserIcons = () => {
-  
-  const [user, setUser] = useState(null);
+ const  user=(userStore.user);
   useEffect(() => {
+    
       console.log("Toolbar hi from useEffect")
-      setUser(JSON.parse(localStorage.getItem(USER_KEY)) || null)
-      window.addEventListener('storage', storageEventHandler,true);
+     
 
-  }, []);
-  
-  function storageEventHandler() {
-      console.log("hi from storageEventHandler")
-      setUser(JSON.parse(localStorage.getItem(USER_KEY)) || null)
-  }
-
-
-  
-
+  }, [user]);
 const authAdmin=authStore.authAdmin;
 const authUser=authStore.authUser;
 const auth=authStore.authUser;
-
-let lotlist=0;
-let  wishlist=0; 
-if(user)
-{
-lotlist=user.lotlist.length;
-wishlist=user.wishlist.length;
-}
+const lotlist=user?user.lotlist.length:'';
+const wishlist=user?user.wishlist.length:'';
   const [anchorUserMenu, setAnchorUserMenu] = useState(null);
   const navigate = useNavigate();
   return (

@@ -22,12 +22,10 @@ function HomeForm() {
   const [sortBy, setSortBy] = useState("");
 
   useEffect(() => {
-    authStore.checkUser();
     doApi();
     console.log("mounted Home");
     return () => console.log("unmounting..Home");
   }, [currentPage, category, searchQuery, perPage, sortBy]);
-    const authUser=authStore.authUser;
   const doApi = async () => {
     console.log("getting data");
     try {
@@ -84,4 +82,4 @@ function HomeForm() {
     </div>
   );
 }
-export default observer(HomeForm);
+export default (HomeForm);

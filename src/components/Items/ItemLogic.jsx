@@ -1,10 +1,9 @@
 import authStore from "../../store/authStore/authStore";
-import { USER_KEY } from "../../utils/constants/url.constants";
-
-export default function ItemLogic({ item }) {
+import userStore from "../../store/userStore/userStore";
+function ItemLogic({ item }) {
     authStore.checkUser();
     const auth=authStore.auth;
-  const user = JSON.parse(localStorage.getItem(USER_KEY));
+  const user =userStore.user;
   const difference = item.date_expired - +Date.now();
   let 
     PlaceBid,
@@ -13,7 +12,7 @@ export default function ItemLogic({ item }) {
     DeletefromLotlist,
     AddtoWishList,
     DeletefromWishList;
-  if (auth&&user) {
+  if (auth) {
     if (
       item.item_lot &&
       PlaceBid &&
@@ -50,3 +49,4 @@ export default function ItemLogic({ item }) {
 
   return ( { PlaceBid, Edit, DeletefromMyitems, DeletefromLotlist, AddtoWishList,DeletefromWishList });
 }
+export default (ItemLogic)

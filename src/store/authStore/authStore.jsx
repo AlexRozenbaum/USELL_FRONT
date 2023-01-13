@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
-import { TOKEN_KEY, USER_KEY } from "../../utils/constants/url.constants";
+import { TOKEN_KEY } from "../../utils/constants/url.constants";
+import userStore from "../userStore/userStore";
 
 class Auth {
   authAdmin = false;
@@ -9,16 +10,13 @@ class Auth {
     makeAutoObservable(this);
   }
   checkUser = () => {
-    const user = JSON.parse(localStorage.getItem(USER_KEY));
+   const user=userStore.user;
     const token = localStorage.getItem(TOKEN_KEY);
-    if (token) {
-      if (user)
+    if (token){
         if (user.active === true && user.role === "user") {
           this.authUser = true;
+          console.log(this.authUser)
         }  
-    }
-    if (token) {
-      if (user)
         if (user.active === true && user.role === "admin") {
           this.authAdmin = true;
         }
@@ -29,8 +27,7 @@ class Auth {
     this.authAdmin = false;
     this.authUser = false;
     this.auth = false;
-    localStorage.setItem(TOKEN_KEY, null);
-    localStorage.setItem(USER_KEY, null);
+    localStorage.clear(TOKEN_KEY);
   };
 }
 const authStore = new Auth();

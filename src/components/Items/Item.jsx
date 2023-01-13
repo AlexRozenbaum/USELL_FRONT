@@ -24,6 +24,7 @@ import myImage from "../../assets/photos/undefined.jpg";
 import IconMenu from "../IconMenu/IconMenu";
 import ItemLogic from "./ItemLogic";
 import ItemFunctions from "./ItemFunctions";
+import { observer } from "mobx-react";
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -59,13 +60,13 @@ function Item({ item }) {
   const [DeletefromMyitems, setDeletefromMyitems] = useState(false);
   const MIN_BID=(item.winner_price==null?item.start_price:item.winner_price);
   const winner_priceRef = useRef();
-  ItemFunctions({item,
+   ItemFunctions(item,
     PlaceBid,Bid,
     Edit,
     DeletefromMyitems,
     DeletefromLotlist,
     AddtoWishList,
-    DeletefromWishList});
+    DeletefromWishList);
   const handleOnInput = (e) => {
     if
    ( e.target.value<MIN_BID)
@@ -158,4 +159,4 @@ function Item({ item }) {
     </Card>
   );
 }
-export default Item;
+export default (Item);

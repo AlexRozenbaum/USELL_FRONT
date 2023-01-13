@@ -11,23 +11,19 @@ class User {
   constructor() {
     makeAutoObservable(this);
   }
-   setUser=async(data)=>
-  {
-    this.user=data;
-  }
   fetchUser() {
     const refreshUser = async () => {
       let url = API_URL + "/users/myInfo";
       try {
         let resp = await doApiGet(url);
-       // if (resp.data) {
-       //   console.log(resp.data)
-       //   this.user = resp.data;
-       // } 
-       // else {
-        //  alertStore.set('Message','There is problem , try again later', true);
+       if (resp.data) {
+         console.log(resp.data)
+         this.user = resp.data;
+       } 
+       else {
+         alertStore.set('Message','There is problem , try again later', true);
   
-       // }
+       }
        return resp.data;
       } catch (err) {
         console.log(err);
@@ -41,9 +37,7 @@ class User {
             this.user = data ;
             console.log(data)
     
-        })
-       
-        
+        }) 
     )
 }
  
@@ -62,7 +56,7 @@ class User {
     }
   };
   deleteUser = () => {
-    this.user = {};
+    this.user = null;
   };
 }
 const userStore = new User();
