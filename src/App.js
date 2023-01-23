@@ -35,9 +35,10 @@ function App() {
                 <Route path="additem"            element={<AddItemPage/>} />
           </Route>
           <Route path="admin">
-                <Route path="dashboard" element={<Layout children={<DashBoard />} />}> 
+                <Route path="dashboard/*" element={<Layout children={<DashBoard />} />}> 
+                     <Route path="categories"/>
                       <Route path="users" />
-                      <Route path="categories" />
+                      
                 </Route>
           </Route>
           <Route path='*'   element={<HomePage/>} />

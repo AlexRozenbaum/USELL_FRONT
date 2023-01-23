@@ -12,7 +12,7 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
   const user=userStore.user;
   const authAdmin=authStore.authAdmin;
 const authUser=authStore.authUser;
-const auth=authStore.authUser;
+const auth=authStore.auth;
   useEffect(() => {
     authStore.checkUser();
   }, [auth]);

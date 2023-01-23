@@ -21,24 +21,28 @@ import userStore from "../../store/userStore/userStore";
 
 
 const UserIcons = () => {
- const  user=(userStore.user);
-  useEffect(() => {
-    
-      console.log("Toolbar hi from useEffect")
-     
+const  user=(userStore.user);
 
-  }, [user]);
+let lotlist='';
+let wishlist='';
+  useEffect(() => {
+authStore.checkUser();
+      console.log("Toolbar hi from useEffect")
+  }, []);
 const authAdmin=authStore.authAdmin;
 const authUser=authStore.authUser;
-const auth=authStore.authUser;
-const lotlist=user?user.lotlist.length:'';
-const wishlist=user?user.wishlist.length:'';
+const auth=authStore.auth;
+if(authUser)
+{
+ lotlist=user.lotlist.length;
+ wishlist=user.wishlist.length;
+}
   const [anchorUserMenu, setAnchorUserMenu] = useState(null);
   const navigate = useNavigate();
   return (
     <>{auth&&
     <Box>
-      {authUser? (
+      {authUser&&
         <>
           <Tooltip title="Check your lotlist and bids">
             <IconButton size="large" color="inherit">
@@ -61,10 +65,8 @@ const wishlist=user?user.wishlist.length:'';
               </Badge>
             </IconButton>
           </Tooltip>
-        </>
-      ) : (
-        <>
-          {authAdmin&& (
+        </>}
+          {authAdmin&& 
             <Tooltip title="Admin Dashboard">
               <ListItemIcon>
                 <Dashboard
@@ -73,9 +75,8 @@ const wishlist=user?user.wishlist.length:'';
                 />
               </ListItemIcon>
             </Tooltip>
-          )}
-        </>
-      )}
+          }
+       
       <Tooltip title="Open User Settings">
         <IconButton onClick={(e) => setAnchorUserMenu(e.currentTarget)}>
           <Avatar src={user?user.img_url:''} alt={user?user.name:''}>

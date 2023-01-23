@@ -1,4 +1,5 @@
 import { FormControl } from "@mui/material";
+import { observe, toJS } from "mobx";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import ItemsList from "../../../components/Items/ItemsList";
@@ -9,9 +10,10 @@ import SearchBar from "../../../components/SearchSortPage/SearchBar/SearchBar";
 import SortBy from "../../../components/SearchSortPage/SortBy/SortBy";
 import { doApiGet } from "../../../services/ApiService/ApiService";
 import authStore from "../../../store/authStore/authStore";
+import userStore from "../../../store/userStore/userStore";
 import { API_URL, USER_KEY } from "../../../utils/constants/url.constants";
-
 function MyWishListForm() {
+  const  user=toJS(userStore.user);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [countPages, setcountPages] = useState(1);
@@ -25,7 +27,7 @@ function MyWishListForm() {
     doApi();
     console.log("mounted Home");
     return () => console.log("unmounting..Home");
-  }, [currentPage, category, searchQuery, perPage, sortBy]);
+  }, [currentPage, category, searchQuery, perPage,sortBy,user]);
     const authUser=authStore.authUser;
   const doApi = async () => {
     console.log("getting data");

@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { action, makeAutoObservable } from "mobx";
 import { TOKEN_KEY } from "../../utils/constants/url.constants";
 import userStore from "../userStore/userStore";
 
@@ -7,20 +7,22 @@ class Auth {
   authUser = false;
   auth = false;
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this,{checkUser:action,deleteAuth:action});
+
   }
-  checkUser = () => {
+  checkUser  () {
    const user=userStore.user;
     const token = localStorage.getItem(TOKEN_KEY);
     if (token){
         if (user.active === true && user.role === "user") {
           this.authUser = true;
-          console.log(this.authUser)
+
         }  
         if (user.active === true && user.role === "admin") {
           this.authAdmin = true;
         }
     }
+   
     this.auth = this.authAdmin || this.authUser;
   };
   deleteAuth = () => {

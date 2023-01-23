@@ -18,7 +18,8 @@ import { upload } from "../../../services/CloudService/cloudServicetoNode";
 import DateService from "../../../services/DateService/DateService";
 import React from "react";
 import { USER_KEY } from "../../../utils/constants/url.constants";
-const user = JSON.parse(localStorage.getItem(USER_KEY));
+import userStore from "../../../store/userStore/userStore";
+const user = userStore.user
 const Profile = () => {
   const [start, setStart] = useState(true);
   useEffect(() => {

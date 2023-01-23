@@ -29,6 +29,7 @@ import CategoryList from '../CategoryList/CategoryList';
 import Main from '../Main/Main';
 import UserList from '../UserList/UserList';
 import React from 'react';
+import { observer } from "mobx-react";
   const drawerWidth = 240;
   
   const openedMixin = (theme) => ({
@@ -186,4 +187,4 @@ import React from 'react';
     );
   };
   
-  export default SideList;
+  export default observer(SideList);

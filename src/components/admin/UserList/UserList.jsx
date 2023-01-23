@@ -72,6 +72,7 @@ const renderSelectEditInputCell = (params) => {
     useEffect(() => {
         usersStore.fetchUsers();  
       }, []);
+      
       const rows = toJS(usersStore.users);
   return (
     <div style={{ height: 300, width: "100%" }}>

@@ -10,6 +10,7 @@ import PerPage from "../../../components/SearchSortPage/PerPage/PerPage";
 import ByCategory from "../../../components/SearchSortPage/ByCategory/ByCategory";
 import SortBy from "../../../components/SearchSortPage/SortBy/SortBy";
 import authStore from "../../../store/authStore/authStore";
+import userStore from "../../../store/userStore/userStore";
 
 function HomeForm() {
   const [items, setItems] = useState([]);
@@ -20,12 +21,13 @@ function HomeForm() {
   const [perPage, setPerPage] = useState(10);
   const [category, setCategory] = useState("ALL");
   const [sortBy, setSortBy] = useState("");
-
+  
+  const  user=userStore.user;
   useEffect(() => {
     doApi();
     console.log("mounted Home");
     return () => console.log("unmounting..Home");
-  }, [currentPage, category, searchQuery, perPage, sortBy]);
+  }, [currentPage, category, searchQuery, perPage, sortBy,user]);
   const doApi = async () => {
     console.log("getting data");
     try {

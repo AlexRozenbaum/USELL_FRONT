@@ -3,7 +3,7 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { IconButton, Menu } from "@mui/material";
-import { Delete, MoreVert } from "@mui/icons-material";
+import { Delete, Edit, MoreVert } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react";
 import { useEffect } from "react";
@@ -16,7 +16,7 @@ const ITEM_HEIGHT = 48;
   }, []);
   let {
     PlaceBid,
-    Edit,
+    EditEnable,
     DeletefromMyitems,
     DeletefromLotlist,
     AddtoWishList,
@@ -55,11 +55,12 @@ const ITEM_HEIGHT = 48;
         }}
       >
        
-          {Edit&&<MenuItem>
+          {EditEnable&&<MenuItem>
             <ListItemIcon>
                 
              <AlertDialog  icon={<Edit/>} question={"Do you want to Edit?"} answer={setEdit}/>
             </ListItemIcon>
+          
             <ListItemText>Edit</ListItemText>
           </MenuItem>}
         {DeletefromMyitems&&<MenuItem>

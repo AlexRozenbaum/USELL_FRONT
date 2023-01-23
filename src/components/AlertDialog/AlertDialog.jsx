@@ -17,7 +17,6 @@ export default function AlertDialog({question,icon,answer}) {
   const handleClose = () => {
     setOpen(false);
   };
-
   return (
     <div>
       

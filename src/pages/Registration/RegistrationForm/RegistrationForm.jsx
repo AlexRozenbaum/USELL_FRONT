@@ -51,7 +51,6 @@ export default function RegistrationForm() {
       let url = API_URL + "/users"
       try {
         let resp = await doApiMethod(url,"POST",bodyData);
-        console.log(bodyData)
         alertStore.set("Welcome", `${resp.data.user.name} Welcome to U SELL!`, true);
         setTimeout(() => {
           navigate("/");

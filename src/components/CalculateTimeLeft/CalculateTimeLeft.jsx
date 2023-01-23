@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import { useEffect} from "react";
 import { useStateIfMounted } from "use-state-if-mounted";
 import DateTimeDisplay from "./DateTimeDisplay";
@@ -27,8 +27,9 @@ const  difference = date_expired-+Date.now();
   
   
   return (
-   <> {difference >0?<Card sx={{ display: 'inline-block' }}>
+   <> {difference >0?<Card sx={{ display: 'inline-block',bgcolor: 'rgba(0, 0, 0, 0.00)',color:'white'}}>
         <DateTimeDisplay value={ timeLeft.days} type={'Days'}  />
+
         <span>:</span>
         <DateTimeDisplay value={ timeLeft.hours} type={'Hours'} />
         <span>:</span>
@@ -36,8 +37,8 @@ const  difference = date_expired-+Date.now();
         <span>:</span>
         <DateTimeDisplay value={timeLeft.seconds} type={'Seconds'} />
        </Card>:
-       <Card >
-        <CardContent  fontWeight={"Bold"} variant="body3" sx={{ display: 'inline-block' ,justifyContent:'center',alignItems:'center'}} align={'center'}  ><span>TIME EXPIRED</span></CardContent>
+       <Card sx={{ display: 'inline-block' ,bgcolor: 'rgba(0, 0, 0, 0.00)'}}>
+        <CardContent  > <Typography fontWeight={"Bold"} variant='h3' color={"red"} style={{display: 'inline-block',bgcolor: 'rgba(0, 0, 0, 0.00)'}} >TIME EXPIRED</Typography></CardContent>
         </Card>}</>
   )
   }
