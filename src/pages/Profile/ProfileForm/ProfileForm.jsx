@@ -20,11 +20,13 @@ import {
   import React from "react";
   import { API_URL } from "../../../utils/constants/url.constants";
   import { doApiMethod } from "../../../services/ApiService/ApiService";
-  import { USER_KEY } from "../../../utils/constants/url.constants";
-  const user = JSON.parse(localStorage.getItem(USER_KEY));
+import { toJS } from "mobx";
+import userStore from "../../../store/userStore/userStore";
   const ProfileForm = () => {
+    const user=toJS(userStore.user);
     const [start, setStart] = useState(true);
     useEffect(() => {
+      userStore.fetchUser();
       if (start === true) console.log("mounted");
       return () => console.log("unmounting...");
     }, [start]);
@@ -60,15 +62,18 @@ import {
         location: locationRef.current.value,
         nickname: nicknameRef.current.value,
       };
-      updateUser(bodyData);
+      console.log(bodyData);
+      await updateUser(bodyData);
       if (selectedFile) {
         await upload(selectedFile, "users_preset","");
       }
+      
     };
     const updateUser = async (bodyData) => {
       let url = API_URL.concat("/users/myinfo/edit");
       try {
-        let resp = await doApiMethod(url, "PATCH", bodyData);
+        console.log(bodyData)
+        let resp = await doApiMethod(url,"PATCH", bodyData);
         if (resp.data) {
           alertStore.set("Message", "Your info updated", true);
         } else {
@@ -79,6 +84,7 @@ import {
         alertStore.set("Message", "There problem , try again later", true);
       }
     };
+  
     return (
       <Dialog open={true} onClose={handleClose}>
         <DialogTitle>

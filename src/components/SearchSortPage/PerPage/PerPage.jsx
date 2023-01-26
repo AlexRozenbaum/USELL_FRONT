@@ -1,10 +1,12 @@
-import { MenuItem, Select } from '@mui/material';
+import { InputLabel, MenuItem, Select } from '@mui/material';
 import React from 'react'
 
 export default function PerPage({perPage,setPerPage}) {
    
   return (
-    <div><Select
+    <div>
+      <InputLabel id="PerPage">PerPage</InputLabel>
+      <Select
     labelId="PerPage"
     id="perPage"
     value={perPage}

@@ -16,9 +16,13 @@ import { observer } from "mobx-react";
 import React from "react";
 import alertStore from "../../../store/alertStore/alertStore";
 import { doApiMethod } from "../../../services/ApiService/ApiService";
-import { API_URL, USER_KEY } from "../../../utils/constants/url.constants";
+import { API_URL } from "../../../utils/constants/url.constants";
+import { toJS } from "mobx";
+import userStore from "../../../store/userStore/userStore";
 const ChangePasswordForm = () => {
-  useEffect(() => {}, []);
+  useEffect(() => {
+    userStore.fetchUser();
+  }, []);
   const currentPassRef = useRef();
   const newPass1Ref = useRef();
   const newPass2Ref = useRef();
@@ -26,7 +30,7 @@ const ChangePasswordForm = () => {
   const handleClose = () => {
     navigate("/");
   };
-  const user = JSON.parse(localStorage.getItem(USER_KEY));
+  const user = toJS(userStore.user)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const currentPassword = currentPassRef.current.value;

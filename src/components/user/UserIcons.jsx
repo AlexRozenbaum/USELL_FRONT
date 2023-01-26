@@ -27,6 +27,7 @@ let lotlist='';
 let wishlist='';
   useEffect(() => {
 authStore.checkUser();
+userStore.fetchUser();
       console.log("Toolbar hi from useEffect")
   }, []);
 const authAdmin=authStore.authAdmin;
@@ -34,8 +35,8 @@ const authUser=authStore.authUser;
 const auth=authStore.auth;
 if(authUser)
 {
- lotlist=user.lotlist.length;
- wishlist=user.wishlist.length;
+ lotlist=user?.lotlist?.length|| '';
+ wishlist=user?.wishlist?.length || '';
 }
   const [anchorUserMenu, setAnchorUserMenu] = useState(null);
   const navigate = useNavigate();

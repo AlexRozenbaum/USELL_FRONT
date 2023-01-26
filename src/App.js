@@ -15,6 +15,7 @@ import ProfilePage from "./pages/Profile/ProfilePage/ProfilePage";
 import AddItemPage from "./pages/AddItem/AddItemPage/AddItemPage";
 import EditItemPage from "./pages/EditItem/EditItemPage/EditItemPage";
 import Layout from "./components/layout/layout";
+import SingleItemPage from "./pages/SingleItem/SingleItemPage/SingleItemPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/signup" element={<RegistrationPage/>}/>
           <Route path="/forgetpassword"element={<ForgetPasswordPage/>}/>
+          <Route path="/singleitem/:id"element={<SingleItemPage/>}/>
           <Route path="user">
                 <Route path="profile"            element={<ProfilePage/>}/>
                 <Route path="changepassword"     element={<ChangePasswordPage/>}/>

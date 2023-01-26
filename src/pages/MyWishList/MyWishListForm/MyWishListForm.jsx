@@ -1,4 +1,4 @@
-import { FormControl } from "@mui/material";
+import { Box, FormControl } from "@mui/material";
 import { observe, toJS } from "mobx";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
@@ -27,7 +27,7 @@ function MyWishListForm() {
     doApi();
     console.log("mounted Home");
     return () => console.log("unmounting..Home");
-  }, [currentPage, category, searchQuery, perPage,sortBy,user]);
+  }, [currentPage, category, searchQuery, perPage,sortBy]);
     const authUser=authStore.authUser;
   const doApi = async () => {
     console.log("getting data");
@@ -63,16 +63,12 @@ function MyWishListForm() {
           <Loading />
         ) : (
           <>
+          <Box display={'flex'} sx={{marginTop:10,gap:5}} alignItems={'center'} justifyContent={'center'}>
             <SearchBar setSearchQuery={setSearchQuery} />
-            <FormControl>
               <ByCategory category={category} setCategory={setCategory} />
-            </FormControl>
-            <FormControl>
               <PerPage perPage={perPage} setPerPage={setPerPage} />
-            </FormControl>
-            <FormControl>
               <SortBy sortBy={sortBy} setSortBy={setSortBy} />
-            </FormControl>
+           </Box>
 
             <ItemsList
               items={items}

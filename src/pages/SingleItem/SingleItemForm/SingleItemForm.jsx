@@ -1,3 +1,4 @@
+
 import { Add, Share } from "@mui/icons-material";
 import {
   Avatar,
@@ -8,48 +9,43 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
-  Collapse,
-  IconButton,
   TextField,
-  Tooltip,
   Typography,
 } from "@mui/material";
 import { observer } from "mobx-react";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import DateService from "../../services/DateService/DateService";
-import CalculateTimeLeft from "../CalculateTimeLeft/CalculateTimeLeft";
-import MyBasicPopover from "../MyBasicPopover/MyBasicPopover";
-import { styled } from "@mui/material/styles";
 import React, { useEffect, useRef, useState } from "react";
-import myImage from "../../assets/photos/undefined.jpg";
-import IconMenu from "../IconMenu/IconMenu";
-import ItemLogic from "./ItemLogic";
-import { useNavigate } from "react-router-dom";
-import { updateUser } from "../user/updateUser/updateUser";
-import authStore from "../../store/authStore/authStore";
-import { API_URL } from "../../utils/constants/url.constants";
-import userStore from "../../store/userStore/userStore";
-import { doApiMethod } from "../../services/ApiService/ApiService";
+import { useNavigate, useParams } from "react-router-dom";
+import { doApiGet, doApiMethod } from "../../../services/ApiService/ApiService";
+import userStore from "../../../store/userStore/userStore";
+import MyBasicPopover from "../../../components/MyBasicPopover/MyBasicPopover";
+import ItemLogic from "../../../components/Items/ItemLogic";
+import authStore from "../../../store/authStore/authStore";
+import { API_URL } from "../../../utils/constants/url.constants";
+import { updateUser } from "../../../components/user/updateUser/updateUser";
+import IconMenu from "../../../components/IconMenu/IconMenu";
+import CalculateTimeLeft from "../../../components/CalculateTimeLeft/CalculateTimeLeft";
+import myImage from "../../../assets/photos/undefined.jpg"
+import DateService from "../../../services/DateService/DateService";
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(-90deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
-function Item({ item }) {
-  const [start, setStart] = useState(true);
-  useEffect(() => {
-    if (start === true) console.log("mounted");
-    return () => console.log("unmounting...");
-  }, [start]);
-  const enable = ItemLogic({ item });
-  console.log(enable)
-  const [expanded, setExpanded] = useState(false);
+function SingleItemForm() {
+  const {id} = useParams();
+  
+    const  fetchItem = async (id) => {
+    
+        let url = API_URL + "/lots/byId/" + id;
+        try {
+          let resp = await doApiGet(url);
+           setItem(resp.data);
+          console.log(resp.data)
+          
+        } catch (err) {
+          console.log(err);
+          alert("there problem ,try again later");
+        }
+      }; 
+
+ const [start, setStart] = useState(true);
+ const [item, setItem] = useState({});
   const [Bid, setBid] = useState("");
   const [PlaceBid, setPlaceBid] = useState(false);
   const [Edit, setEdit] = useState(false);
@@ -57,13 +53,20 @@ function Item({ item }) {
   const [DeletefromWishList, setDeletefromWishlist] = useState(false);
   const [DeletefromLotlist, setDeletefromLotlist] = useState(false);
   const [DeletefromMyitems, setDeletefromMyitems] = useState(false);
-  const MIN_BID =
-    item.winner_price == null ? item.start_price : item.winner_price;
+  const MIN_BID =item.winner_price == null ? item.start_price : item.winner_price;
   const winner_priceRef = useRef();
   const user = userStore.user;
   const authUser = authStore.authUser;
   const navigate = useNavigate();
-  
+  useEffect(() => {
+    if (start === true) {
+        console.log(item)
+      getData();
+      console.log(item)
+      console.log("mounted item");
+    }
+    return () => console.log("unmounting... item");
+  }, []); 
   const updateItem = async (id, bodyData) => {
     let url = API_URL.concat("/lots/", id);
     console.log(bodyData)
@@ -87,15 +90,11 @@ function Item({ item }) {
   };
   const getData = async () => {
     console.log("getting data");
+   await  fetchItem(id);
+    console.log(enable)
     setStart(false);
-  
-  };  useEffect(() => {
-      if (start === true) {
-        getData();
-        console.log("mounted item");
-      }
-      return () => console.log("unmounting... item");
-    }, []);
+  };
+const enable =  ItemLogic({ item });
   doApi();
   async function doApi() {
     if (authUser) {
@@ -152,13 +151,9 @@ function Item({ item }) {
     if (e.target.value < MIN_BID) e.target.value = MIN_BID;
   };
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
   return (
-    
-    <Card sx={{ margin: 5 }}>
+    <Box alignItems={'center'} display={'flex'} justifyContent={'center'}>
+    <Card sx={{ margin: 5,width:500}}>
   
       <CardHeader
         avatar={
@@ -167,10 +162,10 @@ function Item({ item }) {
           </Avatar>
         }
         action={
-          (enable.EditEnable ||
-            enable.DeletefromWishList ||
-            enable.DeletefromLotlist ||
-            enable.DeletefromMyitems) && (
+          (enable?.EditEnable ||
+            enable?.DeletefromWishList ||
+            enable?.DeletefromLotlist ||
+            enable?.DeletefromMyitems) && (
             <IconMenu
               enable={enable}
               setEdit={setEdit}
@@ -187,7 +182,7 @@ function Item({ item }) {
       
       <CardMedia
         component="img"
-        height={"250"}
+        height={"350"}
         image={item.img_url ? item.img_url : myImage}
         alt={item.name}
         
@@ -204,10 +199,11 @@ function Item({ item }) {
       }}
     >
     <CalculateTimeLeft date_expired={item.date_expired} />
+
     </Box>
       </Box>
       <CardContent>
-      {enable.PlaceBid && (
+      {enable?.PlaceBid && (
             <>
               <TextField
                 margin="normal"
@@ -235,7 +231,7 @@ function Item({ item }) {
             </>
           )}
           <Typography  fontWeight={"Bold"}  color={"black"} >
-          Category:{item.categories[0].name}
+          Category:{item.name}
           </Typography>
           <Typography   fontWeight={"Bold"}  color={"black"}  >
           Info: {item.info}
@@ -244,16 +240,39 @@ function Item({ item }) {
           Start Price:{item.start_price} ₪ 
           </Typography>
           <Typography fontWeight={"Bold"} color={"black"}  >
-          Last Bid:{item.winner_price} ₪
+          Last Bid:{item.winner_price || '0'} ₪
           </Typography>
       </CardContent>
+        <CardContent>
+        <Typography fontWeight={"Bold"} color={"black"}  >
+        Location:{item.location}
+          </Typography>
+          <Typography fontWeight={"Bold"} color={"black"}  >
+          Hand: {item.hand}
+          </Typography>
+          <Typography fontWeight={"Bold"} color={"black"}  >
+          Phone: {item.phone}
+          </Typography>
+          <Typography fontWeight={"Bold"} color={"black"}  >
+          Owner:{item.user_id}
+          </Typography>
+          <Typography fontWeight={"Bold"} color={"black"}  >
+          Last Bid:{item.winner_price || 'nobody'} ₪
+          </Typography>
+          <Typography fontWeight={"Bold"} color={"black"}  >
+          The winner bid:{item.winner_price || 'nobody'}
+          </Typography>
+          <Typography fontWeight={"Bold"} color={"black"}  >
+          The winner:{item.winner_user_id || 'nobody'}
+          </Typography>
+        </CardContent>
       <CardActions disableSpacing>
         <MyBasicPopover
           icon={<Add />}
           title="add to your wishlist"
           text={"Added to your wishlist"}
           function={() => {
-            if (enable.AddtoWishList) 
+            if (enable?.AddtoWishList) 
             setAddtoWishlist(true);
           }}
         ></MyBasicPopover>
@@ -262,13 +281,9 @@ function Item({ item }) {
           title="copy link"
           text={"copied link to clipboard"}
         ></MyBasicPopover>
-        <ExpandMore>
-          <Tooltip title="show more">
-            <ExpandMoreIcon onClick={() => navigate("/singleitem/"+item.id)} />
-          </Tooltip>
-        </ExpandMore>
       </CardActions>
     </Card>
+    </Box>
   );
 }
-export default observer(Item);
+export default observer(SingleItemForm);

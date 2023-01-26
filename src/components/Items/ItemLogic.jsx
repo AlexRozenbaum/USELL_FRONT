@@ -1,6 +1,6 @@
 import authStore from "../../store/authStore/authStore";
 import userStore from "../../store/userStore/userStore";
-function ItemLogic({ item }) {
+ function ItemLogic({ item }) {
     authStore.checkUser();
     const auth=authStore.auth;
   const user =userStore.user;
@@ -38,10 +38,10 @@ function ItemLogic({ item }) {
       }
     }
     else DeletefromLotlist = false;
-    if (item.user_id !== user._id && user.wishlist.indexOf(item._id) === -1) {
+    if (item.user_id !== user._id && user?.wishlist?.indexOf(item._id) === -1) {
       AddtoWishList = true;
     } else AddtoWishList = false;
-    if (user.wishlist.indexOf(item._id) !== -1) {
+    if (user?.wishlist?.indexOf(item._id) !== -1) {
       DeletefromWishList = true;
     } else DeletefromWishList = false;
   } else {

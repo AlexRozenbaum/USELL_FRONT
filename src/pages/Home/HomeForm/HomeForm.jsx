@@ -1,4 +1,4 @@
-import { FormControl } from "@mui/material";
+import { Box, FormControl } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SearchBar from "../../../components/SearchSortPage/SearchBar/SearchBar";
 import { observer } from "mobx-react";
@@ -20,7 +20,7 @@ function HomeForm() {
   const [searchQuery, setSearchQuery] = useState("");
   const [perPage, setPerPage] = useState(10);
   const [category, setCategory] = useState("ALL");
-  const [sortBy, setSortBy] = useState("");
+  const [sortBy, setSortBy] = useState("default by _id");
   
   const  user=userStore.user;
   useEffect(() => {
@@ -62,16 +62,12 @@ function HomeForm() {
           <Loading />
         ) : (
           <>
+          <Box display={'flex'} sx={{marginTop:10,gap:5}} alignItems={'center'} justifyContent={'center'}>
             <SearchBar setSearchQuery={setSearchQuery} />
-            <FormControl>
               <ByCategory category={category} setCategory={setCategory} />
-            </FormControl>
-            <FormControl>
               <PerPage perPage={perPage} setPerPage={setPerPage} />
-            </FormControl>
-            <FormControl>
               <SortBy sortBy={sortBy} setSortBy={setSortBy} />
-            </FormControl>
+           </Box>
             <ItemsList
               items={items}
               countPages={countPages}
